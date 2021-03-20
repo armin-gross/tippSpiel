@@ -1,23 +1,29 @@
 <?php
+
 try{
     $db = new mysqli("localhost", "root", "","tippspiel");
   ?>
 
-  <h2>Registrieren</h2>
+  <link rel="stylesheet" href="login.css">
+
+  <h2>Login</h2>
+
   <form action="" method="post">
 
   <label for="lbl_nickname">Nickname:</label><br>
   <input type="text" id="nickname" name="nickname"><br><br>
 
   <label for="lbl_vorname">Passwort:</label><br>
-  <input type="password" id="passwort" name="passwort"><br><br>
+  <input type="password" id="passwort" name="passwort"><br>
 
-  <button type="submit" name="registrieren" id="registrieren">Registrieren</button>
+  <a href="registrieren.php">Noch kein Konto?</a><br><br>
+
+  <button type="submit" name="login" id="login">Einloggen</button>
   </form>
 
   <?php
 
-  if(isset($_POST["registrieren"])){
+  if(isset($_POST["login"])){
     $nin = $_POST["nickname"];
     $pw = $_POST["passwort"];
 
@@ -34,6 +40,4 @@ try{
     }catch(Exception $e){
       echo "Fehler:". $e->getMessage();
     }
-
-
   ?>
