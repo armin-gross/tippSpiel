@@ -1,7 +1,11 @@
 <?php
+$host = "localhost";
+$name = "tippspiel";
+$user = "root";
+$passwort = "";
 
 try{
-    $db = new mysqli("localhost", "root", "","tippspiel");
+  $db = new PDO("mysql:host=$host;dbname=$name", $user, $passwort);
   ?>
 
   <link rel="stylesheet" href="login.css">
@@ -14,7 +18,7 @@ try{
   <input type="text" id="nickname" name="nickname"><br><br>
 
   <label for="lbl_vorname">Passwort:</label><br>
-  <input type="password" id="passwort" name="passwort"><br>
+  <input type="password" id="password" name="password"><br>
 
   <a href="registrieren.php">Noch kein Konto?</a><br><br>
 
@@ -24,20 +28,33 @@ try{
   <?php
 
   if(isset($_POST["login"])){
-    $nin = $_POST["nickname"];
-    $pw = $_POST["passwort"];
+  $stmt = $db->prepare("SELECT * FROM benutzer WHERE nickname = :name"); //Überprüfen ob Nutzername bereits existiert
+  $stmt->bindParam(":name", $_POST["nickname"]);
+  $stmt->execute();
+  $count = $stmt->rowCount();
 
-    $insert = "INSERT INTO `benutzer`(`nickname`, `passwort`)
-  VALUES (?, ?)";
+  if($count == 1){
+    //Nutzername existiert
+    $row = $stmt->fetch();
+    echo $row["nickname"];?><br><?php
+    echo $row["passwort"]; ?><br><?php
+    echo $_POST["password"];?><br><?php
 
-    $erg = $db->prepare($insert);
-    $erg->bind_param("ss", $nin, $pw);
-    $erg->execute();
+    if(password_verify($_POST["password"], $row["passwort"])){
+      session_start();
+      $_SESSION["nickname"] = $row["nickname"];
+      header("Location: test.php");
 
-    echo 'Eintrag erfolgreich';
+    }else{ //Passwort stimmt nicht
+      echo "Der Nutzername und/oder das Passwort ist falsch 187ener sind in dem raum";
+}
+
+}else{ //Nutzername existiert nicht
+    echo "Der Nutzername und/oder das Passwort ist falsch pepe";
+}
+
   }
-    $db->close();
-    }catch(Exception $e){
+}catch(PDOException $e){
       echo "Fehler:". $e->getMessage();
     }
   ?>
