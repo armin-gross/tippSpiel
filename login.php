@@ -8,7 +8,7 @@ try{
   $db = new PDO("mysql:host=$host;dbname=$name", $user, $passwort);
   ?>
 
-  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="style.css">
 
   <h2>Login</h2>
 
@@ -36,21 +36,18 @@ try{
   if($count == 1){
     //Nutzername existiert
     $row = $stmt->fetch();
-    echo $row["nickname"];?><br><?php
-    echo $row["passwort"]; ?><br><?php
-    echo $_POST["password"];?><br><?php
 
     if(password_verify($_POST["password"], $row["passwort"])){
       session_start();
       $_SESSION["nickname"] = $row["nickname"];
-      header("Location: test.php");
+      header("Location: tippspiel.php");
 
     }else{ //Passwort stimmt nicht
-      echo "Der Nutzername und/oder das Passwort ist falsch 187ener sind in dem raum";
+      echo "Der Nutzername und/oder das Passwort ist falsch";
 }
 
 }else{ //Nutzername existiert nicht
-    echo "Der Nutzername und/oder das Passwort ist falsch pepe";
+    echo "Der Nutzername und/oder das Passwort ist falsch";
 }
 
   }

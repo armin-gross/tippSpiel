@@ -9,6 +9,7 @@ try{
 
 
   ?>
+  <link rel="stylesheet" href="style.css">
 
   <h2>Registrieren</h2>
   <form action="" method="post">
@@ -20,7 +21,9 @@ try{
   <input type="password" id="password" name="password"><br><br>
 
   <label for="lbl_vorname">Passwort wiederholen:</label><br>
-  <input type="password" id="password2" name="password2"><br><br>
+  <input type="password" id="password2" name="password2"><br>
+
+  <a href="login.php">Zurück zum Login</a><br><br>
 
   <button type="submit" name="registrieren" id="registrieren">Registrieren</button>
   </form>
@@ -38,7 +41,7 @@ try{
     if($_POST["password"] == $_POST["password2"]){ //Überprüfen ob passwörter übereinstimmen
       $stmt = $db->prepare("INSERT INTO benutzer (nickname, passwort) values (:name, :passwort)");
       $stmt->bindParam(":name", $_POST["nickname"]);
-      $pwHash = password_hash($_POST["password"], PASSWORD_BCRYPT); //Passwort wird gehasht
+      $pwHash = password_hash($_POST["password"], PASSWORD_DEFAULT); //Passwort wird gehasht
       $stmt->bindParam(":passwort", $pwHash);
       $stmt->execute();
       echo "Dein Account wurde Angelegt";
