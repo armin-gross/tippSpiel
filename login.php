@@ -44,10 +44,21 @@ try{
 
     }else{ //Passwort stimmt nicht
       echo "Der Nutzername und/oder das Passwort ist falsch";
+      ?>
+      <script>
+        document.getElementById("nickname").value = "<?php echo $_POST["nickname"]; ?>";
+      </script>
+      <?php
+
 }
 
 }else{ //Nutzername existiert nicht
     echo "Der Nutzername und/oder das Passwort ist falsch";
+    ?>
+    <script>
+      document.getElementById("nickname").value = "<?php echo $_POST["nickname"]; ?>";
+    </script>
+    <?php
 }
 
   }
