@@ -1,6 +1,8 @@
 <?php
 require_once('datenbank.php');
 require_once('fussballspiel.php');
+require_once('erstellefussballspiel.php');
+
 session_start();
 if(!isset($_SESSION["nickname"])){
   header("Location: login.php");
@@ -10,11 +12,6 @@ $benutzer = $_SESSION["benutzer"];
 $stmt = $db->prepare("SELECT punktestand FROM `benutzer` WHERE benutzer.nickname = '$benutzer'");
 $stmt->execute();
 $punktestand = $stmt->fetch();
-
-$spiel1 = new fussballspiel(1, $db);
-$spiel2 = new fussballspiel(2, $db);
-$spiel3 = new fussballspiel(3, $db);
-$spiel4 = new fussballspiel(4, $db);
 
 
 ?>
@@ -35,32 +32,21 @@ $spiel4 = new fussballspiel(4, $db);
     <!-- Fußball spiele: -->
     <!-- Spiel1 -->
     <h3>Fußballspiel 1:</h3>
-    <p id="mannschaft1"></p>
-    <p id="mannschaft8"></p>
-    <script>document.getElementById("mannschaft1").innerHTML = "<?php echo $spiel1->getManschaft('a'); ?> gegen ";</script>
-    <script>document.getElementById("mannschaft8").innerHTML = "<?php  echo $spiel1->getManschaft('b'); ?>";</script>
+    <p id="spiel1"></p>
 
     <!-- Spiel2 -->
     <h3>Fußballspiel 2:</h3>
-    <p id="mannschaft2"></p>
-    <p id="mannschaft7"></p>
-    <script>document.getElementById("mannschaft2").innerHTML = "<?php echo $spiel2->getManschaft('a'); ?> gegen ";</script>
-    <script>document.getElementById("mannschaft7").innerHTML = "<?php  echo $spiel2->getManschaft('b'); ?>";</script>
+    <p id="spiel2"></p>
 
     <!-- Spiel3 -->
     <h3>Fußballspiel 3:</h3>
-    <p id="mannschaft3"></p>
-    <p id="mannschaft6"></p>
-    <script>document.getElementById("mannschaft3").innerHTML = "<?php echo $spiel3->getManschaft('a'); ?> gegen ";</script>
-    <script>document.getElementById("mannschaft6").innerHTML = "<?php  echo $spiel3->getManschaft('b'); ?>";</script>
+    <p id="spiel3"></p>
 
     <!-- Spiel4 -->
     <h3>Fußballspiel 3:</h3>
-    <p id="mannschaft4"></p>
-    <p id="mannschaft5"></p>
-    <script>document.getElementById("mannschaft4").innerHTML = "<?php echo $spiel4->getManschaft('a'); ?> gegen ";</script>
-    <script>document.getElementById("mannschaft5").innerHTML = "<?php  echo $spiel4->getManschaft('b'); ?>";</script>
+    <p id="spiel4"></p>
 
+    <script>setMannschaft()</script>
 
 
     <br><br><a href="logout.php">Abmelden</a><br><br>
