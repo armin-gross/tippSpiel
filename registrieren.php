@@ -23,7 +23,7 @@ try{
   <label for="lbl_vorname">Passwort wiederholen:</label><br>
   <input type="password" id="password2" name="password2"><br>
 
-  <a href="login.php">Zurück zum Login</a><br><br>
+  <a href="index.php">Zurück zum Login</a><br><br>
 
   <button type="submit" name="registrieren" id="registrieren">Registrieren</button>
   </form>
