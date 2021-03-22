@@ -12,7 +12,6 @@ if(!isset($_SESSION["nickname"])){
     <title></title>
   </head>
   <body>
-    <h1>du existierst</h1>
     <a href="logout.php">Abmelden</a><br><br>
     <a href="kontoLoeschen.php">Konto Löschen</a>
   </body>
