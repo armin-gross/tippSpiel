@@ -38,6 +38,7 @@ $spiel4 = new fussballspiel(4, $db);
     <!-- Spiel1 -->
     <h3>Fußballspiel 1:</h3>
     <p id="spiel1"></p>
+    <p id="feld1"></p>
     <form class="wette_platzieren" action="index.html" method="post">
     <button type="button" name="spiel1_bt" onclick=neuesFeld()>Wette auf diesem Spiel platzieren</button>
     </form><br>
