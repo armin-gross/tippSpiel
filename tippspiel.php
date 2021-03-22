@@ -27,6 +27,7 @@ $spiel4 = new fussballspiel(4, $db);
     <script src="aufSpielSetzen.js"></script>
   </head>
   <body>
+<<<<<<< HEAD
     <!-- Ausgabe von Name und Punktestand -->
     <p id="nutzername"></p>
     <script>document.getElementById("nutzername").innerHTML = "Angemeldet als: <?php echo $benutzer ?>";</script>
@@ -74,6 +75,9 @@ $spiel4 = new fussballspiel(4, $db);
 
 
     <br><br><a href="logout.php">Abmelden</a><br><br>
+=======
+    <a href="logout.php">Abmelden</a><br><br>
+>>>>>>> 588f9605aab244891079afa4a3c4642048e79bdf
     <a href="kontoLoeschen.php">Konto Löschen</a>
   </body>
 </html>
