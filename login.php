@@ -1,11 +1,5 @@
 <?php
-$host = "localhost";
-$name = "tippspiel";
-$user = "root";
-$passwort = "";
-
-try{
-  $db = new PDO("mysql:host=$host;dbname=$name", $user, $passwort);
+require_once('datenbank.php');
   ?>
 
   <link rel="stylesheet" href="style.css">
@@ -37,9 +31,10 @@ try{
     //Nutzername existiert
     $row = $stmt->fetch();
 
-    if(password_verify($_POST["password"], $row["passwort"])){
+    if(password_verify($_POST["password"], $row["passwort"])){ //Überprüfen ob Passwort stimmt
       session_start();
       $_SESSION["nickname"] = $row["nickname"];
+      $_SESSION["benutzer"] = $_POST["nickname"];
       header("Location: tippspiel.php");
 
     }else{ //Passwort stimmt nicht
@@ -62,7 +57,4 @@ try{
 }
 
   }
-}catch(PDOException $e){
-      echo "Fehler:". $e->getMessage();
-    }
   ?>

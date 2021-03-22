@@ -1,13 +1,5 @@
 <?php
-$host = "localhost";
-$name = "tippspiel";
-$user = "root";
-$passwort = "";
-
-try{
-  $db = new PDO("mysql:host=$host;dbname=$name", $user, $passwort);
-
-
+require_once('datenbank.php');
   ?>
   <link rel="stylesheet" href="style.css">
 
@@ -23,7 +15,7 @@ try{
   <label for="lbl_vorname">Passwort wiederholen:</label><br>
   <input type="password" id="password2" name="password2"><br>
 
-  <a href="index.php">Zurück zum Login</a><br><br>
+  <a href="login.php">Zurück zum Login</a><br><br>
 
   <button type="submit" name="registrieren" id="registrieren">Registrieren</button>
   </form>
@@ -39,7 +31,7 @@ try{
   if($count == 0){
     //Nutzername ist frei
     if($_POST["password"] == $_POST["password2"]){ //Überprüfen ob passwörter übereinstimmen
-      $stmt = $db->prepare("INSERT INTO benutzer (nickname, passwort) values (:name, :passwort)");
+      $stmt = $db->prepare("INSERT INTO benutzer (nickname, passwort, punktestand) values (:name, :passwort, 0)");
       $stmt->bindParam(":name", $_POST["nickname"]);
       $pwHash = password_hash($_POST["password"], PASSWORD_DEFAULT); //Passwort wird gehasht
       $stmt->bindParam(":passwort", $pwHash);
@@ -53,7 +45,4 @@ try{
     echo "Der Nutzername ist leider bereits vergeben";
 
   }
-  }catch(PDOException $e){
-      echo "Fehler:". $e->getMessage();
-    }
     ?>

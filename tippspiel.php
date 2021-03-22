@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION["nickname"])){
-  header("Location: index.php");
+  header("Location: login.php");
   exit;
 }
 ?>
@@ -13,6 +13,7 @@ if(!isset($_SESSION["nickname"])){
   </head>
   <body>
     <h1>du existierst</h1>
-    <a href="logout.php">Abmelden</a>
+    <a href="logout.php">Abmelden</a><br><br>
+    <a href="kontoLoeschen.php">Konto Löschen</a>
   </body>
 </html>
