@@ -1,24 +1,30 @@
+<div class="topbox">
+<h2 class="topboxtext">Südtirol Meisterschaft</h2>
+<img class="falgge" src="Bilder/flagge_suedtirol.png" alt="Südtirol">
+</div>
+
 <?php
 require_once('datenbank.php');
   ?>
   <link rel="stylesheet" href="style.css">
-
-  <h2>Registrieren</h2>
+<div class="loginbox">
+  <h2 class="login_titel">Registrieren</h2>
   <form action="" method="post">
+  <label class="insiteloginbox" for="lbl_nickname">Nickname:</label><br>
+  <input class="inputbox" type="text" id="nickname" name="nickname"><br><br>
+  <label class="insiteloginbox" for="lbl_vorname">Passwort:</label><br>
+  <input class="inputbox" type="password" id="password" name="password"><br><br>
+  <label class="insiteloginbox" for="lbl_vorname">Passwort wiederholen:</label><br>
+  <input class="inputbox" type="password" id="password2" name="password2"><br>
+  </div>
+<div class="link">
 
-  <label for="lbl_nickname">Nickname:</label><br>
-  <input type="text" id="nickname" name="nickname"><br><br>
-
-  <label for="lbl_vorname">Passwort:</label><br>
-  <input type="password" id="password" name="password"><br><br>
-
-  <label for="lbl_vorname">Passwort wiederholen:</label><br>
-  <input type="password" id="password2" name="password2"><br>
 
   <a href="login.php">Zurück zum Login</a><br><br>
 
-  <button type="submit" name="registrieren" id="registrieren">Registrieren</button>
+  <button class="button_reg" type="submit" name="registrieren" id="registrieren">Registrieren</button>
   </form>
+</div>
 
   <?php
 
@@ -36,13 +42,13 @@ require_once('datenbank.php');
       $pwHash = password_hash($_POST["password"], PASSWORD_DEFAULT); //Passwort wird gehasht
       $stmt->bindParam(":passwort", $pwHash);
       $stmt->execute();
-      echo "Dein Account wurde Angelegt";
+      echo "<ausgabetext class:'ausgabetext'>Dein Account wurde Angelegt</ausgabetext>";
 
     }else
-      echo "Die Passwörter stimmen nicht überein";
+      echo "<ausgabetext class:'ausgabetext'>Die Passwörter stimmen nicht überein</ausgabetext>";
 
   }else
-    echo "Der Nutzername ist leider bereits vergeben";
+    echo "<ausgabetext class:'ausgabetext'>Der Nutzername ist leider bereits vergeben</ausgabetext>";
 
   }
     ?>
