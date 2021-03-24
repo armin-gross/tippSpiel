@@ -35,19 +35,28 @@ $punktestand = $stmt->fetch();
     $stmt = $db->prepare("SELECT max(f_id) FROM `fußballspiel`");
     $stmt->execute();
     $anzahlSpiele = $stmt->fetch();
+    $i;
 
     for ($i=1; $i <= $anzahlSpiele["max(f_id)"]; $i++) {
       $spiel = new fussballspiel($i, $db);
+      $mA = $spiel->getManschaft('a');
+      $mB = $spiel->getManschaft('b');
     ?>
     <!-- Ausgabe des spiels an stelle $i -->
     <h3>Fußballspiel <?php echo $i?>:</h3>
     <p id="spiel<?php echo $i?>"></p>
     <form class="wette_platzieren" action="index.html" method="post">
-    <button type="button" name="spiel<?php echo $i?>_bt" onclick=neuesFeld()>Wette auf diesem Spiel platzieren</button>
+    <button type="button" id="spiel<?php echo $i?>_bt" name="spiel1_bt"
+    onclick=neuesFeld(<?php echo $i?>,"<?php echo $mA; ?>","<?php echo $mB; ?>",<?php echo $anzahlSpiele["max(f_id)"]; ?>)
+    >Wette auf diesem Spiel platzieren</button>
     </form><br>
     <script>document.getElementById("spiel<?php echo $i?>").innerHTML =
-    "<?php echo $spiel->getManschaft('a'); ?> gegen <?php echo $spiel->getManschaft('b'); ?>, gespielt wird am <?php echo $spiel->getDatum(); ?> um <?php echo $spiel->getuhrzeit(); ?> Uhr";</script>
+    "<?php echo $mA; ?> gegen <?php echo $mB; ?>, gespielt wird am <?php echo $spiel->getDatum(); ?> um <?php echo $spiel->getuhrzeit(); ?> Uhr";</script>
     <?php
+    }
+
+    if(isset($_POST["spiel1_bt"])){
+      echo "jaaaaaaaaaaaaaaa";
     }
     ?>
 
