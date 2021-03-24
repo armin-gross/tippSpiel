@@ -1,37 +1,27 @@
+<link rel="stylesheet" href="style.css">
 <?php
 require_once('datenbank.php');
   ?>
 
 <div class="topbox">
-<h2>Südtirol Meisterschaft</h2>
+<h2 class="topboxtext">Südtirol Meisterschaft</h2>
+<img class="falgge" src="Bilder/flagge_suedtirol.png" alt="Südtirol">
 </div>
+
 <div class="loginbox">
-  <link rel="stylesheet" href="style.css">
-
-
-
   <h2 class="login_titel">Login</h2>
-
   <form action="" method="post">
-
   <label class="insiteloginbox" for="lbl_nickname">Nickname:</label><br>
   <input class="inputbox" type="text" id="nickname" name="nickname"><br><br>
-
   <label class="insiteloginbox" for="lbl_vorname">Passwort:</label><br>
   <input class="inputbox" type="password" id="password" name="password"><br>
 </div>
+
 <div class="link">
-
-
   <a href="registrieren.php">Noch kein Konto?</a><br><br>
-  </div>
-
-
-
       <button class="button" type="submit" name="login" id="login">Einloggen</button>
   </form>
-
-
+</div>
 
 
   <?php

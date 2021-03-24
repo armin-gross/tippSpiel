@@ -15,18 +15,24 @@ a:active{
   color: blue;
 
 }
-
 /*obereBox*/
 .topbox{
   border: 5px solid black;
-  padding-top: 100px;
-  padding-bottom: 300px;
-  padding-left: 200px;
-  padding-right: 100px;
-  margin-bottom: 150px;
+  padding-top: 1%;
+  padding-bottom: 2%;
+  padding-left: 8%;
+  padding-right: 8%;
+  margin-bottom: 20px;
   background-color: #ec0030;
 }
+.topboxtext{
+  text-align: center;
+  text-decoration: none;
+  font-size: 50px;
+  font-family: fantasy;
 
+
+}
 /*Box wo login/registrierung ist */
 .loginbox{
   text-align: center;
@@ -37,15 +43,13 @@ a:active{
   font-family: fantasy;
   font-size: 60px;
   margin-bottom: 20px;
+  margin-top: 20px;
 }
-
 .insiteloginbox{
   text-align: center;
   font-size: 35px;
   font-family: fantasy;
-
 }
-
 .link{
   text-align: center;
   font-family: fantasy;
@@ -54,24 +58,22 @@ a:active{
 
 
 }
-
 .inputbox{
   height: 40px;
   width: 250px;
+  text-align: center;
+  font-size: 25px;
+  font-family: fantasy;
+  text-decoration: none;
 
 }
-
-
-
 button:hover{
-background: white;
-color: #ec0030;
-border: 2px solid black;
+  background: white;
+  color: #ec0030;
+  border: 2px solid black;
 
 
 }
-
-
 .button {
   text-align: center;
   font-size: 34px;
@@ -80,14 +82,48 @@ border: 2px solid black;
   color: white;
   background-color: #ec0030;
   height: 50px;
-  width: 180px;
+  width: 180px;/*
   margin: 0;
   position: absolute;
-
-  top: 990px;
+  top: 93%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  */
+
+
+}
+.falgge{
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+}
+.button_reg{
+  text-align: center;
+  font-size: 34px;
+  font-family: fantasy;
+  border: none;
+  color: white;
+  background-color: #ec0030;
+  height: 50px;
+  width: 190px;
+  /*
+  margin: 0;
+  position: absolute;
+  top: 93%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  */
+
+
+
+}
+.ausgabetext{
+  font-size: 25px;
+  text-decoration: none;
+  color: red;
+  text-align: center;
 
 
 
