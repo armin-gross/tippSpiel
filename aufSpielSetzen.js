@@ -26,10 +26,11 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
   wortTore.textContent = " Tore ";
 
 //Button um Tipp in Datenbank einzutragen
-  tippen_bt = document.createElement("button");
-  tippen_bt.setAttribute('id', 'tippen_bt');
-  tippen_bt.onclick = "tippspiel.php";
-  tippen_bt.textContent = "Tipp Abgeben";
+  // tippen_bt = document.createElement("button");
+  // tippen_bt.setAttribute('id', 'tippen_bt');
+  // tippen_bt.setAttribute('name', 'tippen_bt');
+  // tippen_bt.setAttribute('type', 'button');
+  // tippen_bt.textContent = "Tipp Abgeben";
 
 //spiel = button welcher geklickt wurde
   let spiel = document.getElementById("spiel"+i+"_bt");
@@ -43,7 +44,7 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 
   document.getElementsByTagName('body')[0].appendChild(wortTore);
 
-  document.getElementsByTagName('body')[0].appendChild(tippen_bt);
+  // document.getElementsByTagName('body')[0].appendChild(tippen_bt);
 
 //labels, felder und button an richtige stelle bringen
   spiel.parentNode.insertBefore(nameTeamA, spiel);
@@ -54,8 +55,9 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 
   spiel.parentNode.insertBefore(wortTore, spiel);
 
-  spiel.parentNode.insertBefore(tippen_bt, spiel);
+  // spiel.parentNode.insertBefore(tippen_bt, spiel);
   spiel.remove();
   ueberpruefung++;
+
 }
 }
