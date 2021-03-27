@@ -13,10 +13,12 @@ $stmt->execute();
 $punktestand_array = $stmt->fetch();
 $punktestand = $punktestand_array["punktestand"];
 
+
 $stmt = $db->prepare("SELECT b_id FROM `benutzer` WHERE benutzer.nickname = '$benutzer'");
 $stmt->execute();
 $benutzer_id_array = $stmt->fetch();
 $benutzer_id = $benutzer_id_array["b_id"];
+
 
 ?>
 <!DOCTYPE html>
@@ -53,8 +55,10 @@ $benutzer_id = $benutzer_id_array["b_id"];
     <h3>Fußballspiel <?php echo $i?>:</h3>
     <!-- erstellen von p mit id spiel+i -->
     <p id="spiel<?php echo $i?>"></p>
-    <!-- button der javascript methode neuesFeld aufruft, und parameter i, mannschaftA, mannschaftB und anzahlSpiele übergibt -->
     <form method="post">
+      <!-- ausgabe um zu wissen wissen spiels button geklickt wurde -->
+    <input name="welchesSpiel" value="<?php echo $i?>" readonly size="1px">
+    <!-- button der javascript methode neuesFeld aufruft, und parameter i, mannschaftA, mannschaftB und anzahlSpiele übergibt -->
     <button type="submit" id="spiel<?php echo $i?>_bt" name="spiel<?php echo $i?>_bt"
     onclick=neuesFeld(<?php echo $i?>,"<?php echo $mA; ?>","<?php echo $mB; ?>",<?php echo $anzahlSpiele["max(f_id)"]; ?>)
     >Wette auf diesem Spiel platzieren</button>
@@ -66,6 +70,18 @@ $benutzer_id = $benutzer_id_array["b_id"];
     <?php
   }
 
+  $w_spiel = $_POST["welchesSpiel"]; //Id des Spiels dessen Button geklickt wurde
+
+  // überprüfen ob Benutzer schon auf Spiele getippt hat
+  $stmt = $db->prepare("SELECT * FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $w_spiel");
+  $stmt->execute();
+  $BenutzerTippsAufSpiel = $stmt->rowCount();
+   if($BenutzerTippsAufSpiel != 0){
+     ?>
+     <script>loescheButton(<?php echo $w_spiel ?>)</script>
+     <?php
+   }
+
 //Wenn "Tipp Abgeben" button geklickt wird, dann die zahlen der zwei felder in datenbank eintragen
   if(isset($_POST["tippen_bt"])){
     //Überprüfen ob die eingabe eine Zahl ist
@@ -74,10 +90,12 @@ $benutzer_id = $benutzer_id_array["b_id"];
       if($_POST["tippA"] <= 50 && $_POST["tippB"] <= 50){
         $tA = $_POST["tippA"]; //Eingabe in Feld von Team A
         $tB = $_POST["tippB"]; //Eingabe in Feld von Team B
-        $b_id = $benutzer_id;  //Id des aktuell angemeldeten Beuntzers
-        $w_spiel = $_POST["welchesSpiel"]; //Id des Spiels dessen Button geklickt wurde
-        $stmt = $db->prepare("INSERT INTO benutzer_tippt_fußballspiel (tipp_a, tipp_b, b_id, f_id) values ($tA, $tB, $b_id, $w_spiel)");
+        $benutzer_id;  //Id des aktuell angemeldeten Beuntzers
+        $stmt = $db->prepare("INSERT INTO benutzer_tippt_fußballspiel (tipp_a, tipp_b, b_id, f_id) values ($tA, $tB, $benutzer_id, $w_spiel)");
         $stmt->execute();
+        ?>
+        <!-- <script>loescheButton(<?php echo $w_spiel ?>)</script> -->
+        <?php
     }else {
       echo "Deine Tipps dürfen nicht höher als 50 sein";
     }

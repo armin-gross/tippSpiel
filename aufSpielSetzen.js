@@ -7,12 +7,6 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
   nameTeamA = document.createElement("label");
   nameTeamA.textContent = mannschaftA+" schießt: ";
 
-  welchesSpiel = document.createElement("input");
-  welchesSpiel.setAttribute('name', "welchesSpiel");
-  welchesSpiel.setAttribute('value', i);
-  welchesSpiel.readOnly = true;
-  welchesSpiel.setAttribute('size', "1px");
-
   feldTippA = document.createElement("input");
   feldTippA.setAttribute('id', "tippA");
   feldTippA.setAttribute('name', "tippA");
@@ -33,7 +27,7 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 
 // Button um Tipp in Datenbank einzutragen
   tippen_bt = document.createElement("button");
-  tippen_bt.setAttribute('id', 'tippen_bt');
+  tippen_bt.setAttribute('id', 'tippen_bt1');
   tippen_bt.setAttribute('name', 'tippen_bt');
   tippen_bt.textContent = "Tipp Abgeben";
 
@@ -41,7 +35,6 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
   let spiel = document.getElementById("spiel"+i+"_bt");
 
 //Ausgabe der labels, felder und button
-  document.getElementsByTagName('body')[0].appendChild(welchesSpiel);
   document.getElementsByTagName('body')[0].appendChild(nameTeamA);
   document.getElementsByTagName('body')[0].appendChild(feldTippA);
 
@@ -53,7 +46,6 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
   document.getElementsByTagName('body')[0].appendChild(tippen_bt);
 
 //labels, felder und button an richtige stelle bringen
-  spiel.parentNode.insertBefore(welchesSpiel, spiel);
   spiel.parentNode.insertBefore(nameTeamA, spiel);
   spiel.parentNode.insertBefore(feldTippA, spiel);
 
@@ -64,7 +56,12 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 
   spiel.parentNode.insertBefore(tippen_bt, spiel);
   spiel.remove();
+
   ueberpruefung++;
 
 }
 }
+
+  function loescheButton(i){
+    document.getElementById("spiel"+i+"_bt").remove();
+  }
