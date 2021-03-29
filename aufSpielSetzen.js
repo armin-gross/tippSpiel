@@ -27,7 +27,7 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 
 // Button um Tipp in Datenbank einzutragen
   tippen_bt = document.createElement("button");
-  tippen_bt.setAttribute('id', 'tippen_bt1');
+  tippen_bt.setAttribute('id', 'tippen_bt');
   tippen_bt.setAttribute('name', 'tippen_bt');
   tippen_bt.textContent = "Tipp Abgeben";
 
@@ -62,6 +62,10 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 }
 }
 
-  function loescheButton(i){
-    document.getElementById("spiel2_bt").remove();
-  }
+
+function neuesAdminFeld(i){
+//erstellen von label und eingabe feld des Team A
+  nameTeamA = document.createElement("input");
+  nameTeamA.setAttribute('placeholder', "Mannschaft A");
+
+}

@@ -16,6 +16,9 @@ if(!isset($_SESSION["nickname"])){
   exit;
 }
 $benutzer = $_SESSION["benutzer"];
+if($benutzer == "admin"){
+  header("Location: admin_tippspiel.php");
+}else{
 
 //Punktestand des Benutzes
 $stmt = $db->prepare("SELECT punktestand FROM `benutzer` WHERE benutzer.nickname = '$benutzer'");
@@ -91,12 +94,10 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
     >Wette auf diesem Spiel platzieren</button><!-- button der onclick i, mannschaftA, mannschaftB und anzahlSpiele übergibt -->
     </form><br>
     <!-- //Ausgabe: Mannschaft A spielt gegen Mannschaft b am "Datum" umd "Uhrzeit" -->
-  <div class="">
     <script>
     document.getElementById("spiel<?php echo $i?>").innerHTML =
     "<?php echo $mA; ?> gegen <?php echo $mB; ?>, gespielt wird am <?php echo $spiel->getDatum(); ?> um <?php echo $spiel->getuhrzeit(); ?> Uhr";
     </script>
-  </div>
     <?php
 }else {//Wenn Tipp schon abgegeben wurde
   ?>
@@ -129,6 +130,7 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
       echo "Deine Tipps müssen schon Zahlen sein";
     }
   }
+}
 
 
 
