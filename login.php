@@ -23,7 +23,7 @@ require_once('datenbank.php');
   </form>
 </div>
 
-
+<div class="fehlermedlung">
   <?php
 
   if(isset($_POST["login"])){
@@ -43,7 +43,7 @@ require_once('datenbank.php');
       header("Location: tippspiel.php");
 
     }else{ //Passwort stimmt nicht
-      echo "Der Nutzername und/oder das Passwort ist falsch";
+      echo "<text class='fehlermedlung' >Der Nutzername und/oder das Passwort ist falsch</text>";
       ?>
       <script>
         document.getElementById("nickname").value = "<?php echo $_POST["nickname"]; ?>";
@@ -53,7 +53,7 @@ require_once('datenbank.php');
 }
 
 }else{ //Nutzername existiert nicht
-    echo "Der Nutzername und/oder das Passwort ist falsch";
+    echo "<text class='fehlermedlung'>Der Nutzername und/oder das Passwort ist falsch</text>";
     ?>
     <script>
       document.getElementById("nickname").value = "<?php echo $_POST["nickname"]; ?>";
@@ -63,3 +63,4 @@ require_once('datenbank.php');
 
   }
   ?>
+  </div>
