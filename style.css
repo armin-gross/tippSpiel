@@ -11,6 +11,15 @@ a:hover{
   color: #ec0030;
 
 }
+a.linkindex:hover{
+  font-size: 25px;
+  text-decoration: underline;
+  color: white;
+}
+a.linkindex{
+  text-decoration: inherit;
+  color: white;
+}
 a:active{
   color: blue;
 
@@ -18,8 +27,8 @@ a:active{
 /*obereBox*/
 .topbox{
   border: 5px solid black;
-  padding-top: 1%;
-  padding-bottom: 2%;
+  padding-top: 0.01%;
+  padding-bottom: 1%;
   padding-left: 8%;
   padding-right: 8%;
   margin-bottom: 20px;
@@ -54,9 +63,6 @@ a:active{
   text-align: center;
   font-family: fantasy;
   color: blue;
-
-
-
 }
 .inputbox{
   height: 40px;
@@ -65,14 +71,11 @@ a:active{
   font-size: 25px;
   font-family: fantasy;
   text-decoration: none;
-
 }
 button:hover{
   background: white;
   color: #ec0030;
   border: 2px solid black;
-
-
 }
 .button {
   text-align: center;
@@ -90,8 +93,6 @@ button:hover{
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   */
-
-
 }
 .falgge{
  display: block;
@@ -115,16 +116,37 @@ button:hover{
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   */
-
+}
+.fehlermedlung{
+ /*skrr poww*/
+ font-size: 17px;
+ text-align: center;
+ font-family: fantasy;
+ margin-top: 20px;
+}
+.benutzer{
+   float: right;
+   margin-right: 1%;
+   font-family: fantasy;
+   text-decoration: none;
 
 
 }
-.ausgabetext{
-  font-size: 25px;
-  text-decoration: none;
-  color: red;
-  text-align: center;
 
-
-
+/*Dropdown*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ec0030;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
 }
