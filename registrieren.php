@@ -25,7 +25,7 @@ require_once('datenbank.php');
   <button class="button_reg" type="submit" name="registrieren" id="registrieren">Registrieren</button>
   </form>
 </div>
-
+<div class="fehlermedlung">
   <?php
 
   if(isset($_POST["registrieren"])){
@@ -42,13 +42,14 @@ require_once('datenbank.php');
       $pwHash = password_hash($_POST["password"], PASSWORD_DEFAULT); //Passwort wird gehasht
       $stmt->bindParam(":passwort", $pwHash);
       $stmt->execute();
-      echo "<ausgabetext class:'ausgabetext'>Dein Account wurde Angelegt</ausgabetext>";
+      echo "Dein Account wurde Angelegt";
 
     }else
-      echo "<ausgabetext class:'ausgabetext'>Die Passwörter stimmen nicht überein</ausgabetext>";
+      echo "Die Passwörter stimmen nicht überein";
 
   }else
-    echo "<ausgabetext class:'ausgabetext'>Der Nutzername ist leider bereits vergeben</ausgabetext>";
+    echo "Der Nutzername ist leider bereits vergeben";
 
   }
     ?>
+  </div>

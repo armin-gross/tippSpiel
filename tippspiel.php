@@ -1,3 +1,11 @@
+<link rel="stylesheet" href="style.css">
+<div class="topbox">
+  <h2 class="topboxtext">Südtirol Meisterschaft</h2>
+  <img class="falgge" src="Bilder/flagge_suedtirol.png" alt="Südtirol">
+</div>
+
+
+
 <?php
 require_once('datenbank.php');
 require_once('fussballspiel.php');
@@ -39,8 +47,19 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
   <body>
 
     <!-- Ausgabe von Name und Punktestand -->
-    <p id="nutzername"></p>
+    <div class="benutzer">
+    <text id="nutzername"></text><br>
     <script>document.getElementById("nutzername").innerHTML = "Angemeldet als: <?php echo $benutzer ?>";</script>
+    <div class="dropdown">
+        <span>Account Verwalten</span>
+      <div class="dropdown-content">
+        <a class="linkindex" href="logout.php">Abmelden</a><br>
+        <a class="linkindex" href="kontoLoeschen.php">Konto Löschen</a>
+      </div>
+    </div>
+
+
+    </div>
     <p id="punktestand">213</p><br>
     <script>document.getElementById("punktestand").innerHTML = "Dein Punktestand: <?php echo $punktestand; ?>";</script>
 
@@ -65,10 +84,12 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
     >Wette auf diesem Spiel platzieren</button><!-- button der onclick i, mannschaftA, mannschaftB und anzahlSpiele übergibt -->
     </form><br>
     <!-- //Ausgabe: Mannschaft A spielt gegen Mannschaft b am "Datum" umd "Uhrzeit" -->
+  <div class="">
     <script>
     document.getElementById("spiel<?php echo $i?>").innerHTML =
     "<?php echo $mA; ?> gegen <?php echo $mB; ?>, gespielt wird am <?php echo $spiel->getDatum(); ?> um <?php echo $spiel->getuhrzeit(); ?> Uhr";
     </script>
+  </div>
     <?php
   }
 
@@ -113,7 +134,6 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
 
 
     ?>
-    <br><br><a href="logout.php">Abmelden</a><br><br>
-    <a href="kontoLoeschen.php">Konto Löschen</a>
+
   </body>
 </html>
