@@ -34,6 +34,7 @@ require_once('datenbank.php');
   $stmt->execute();
   $count = $stmt->rowCount();
 
+if($_POST["nickname"] != null && $_POST["password"] != null){
   if($count == 0){
     //Nutzername ist frei
     if($_POST["password"] == $_POST["password2"]){ //Überprüfen ob passwörter übereinstimmen
@@ -50,5 +51,8 @@ require_once('datenbank.php');
   }else
     echo "<ausgabetext class:'ausgabetext'>Der Nutzername ist leider bereits vergeben</ausgabetext>";
 
+  }else {
+    echo "<ausgabetext class:'ausgabetext'>Gib bitte etwas in alle Felder ein</ausgabetext>";
   }
+}
     ?>
