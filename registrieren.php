@@ -43,7 +43,10 @@ if($_POST["nickname"] != null && $_POST["password"] != null){
       $pwHash = password_hash($_POST["password"], PASSWORD_DEFAULT); //Passwort wird gehasht
       $stmt->bindParam(":passwort", $pwHash);
       $stmt->execute();
+<<<<<<< HEAD
       header("Location: login.php");
+=======
+>>>>>>> d45f50cc9cf9f546a7197192420a22e2a95b21ca
       echo "Dein Account wurde Angelegt";
 
     }else
