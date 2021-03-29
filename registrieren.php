@@ -52,7 +52,7 @@ if($_POST["nickname"] != null && $_POST["password"] != null){
     echo "Der Nutzername ist leider bereits vergeben";
 
   }else {
-    echo "<ausgabetext class:'ausgabetext'>Gib bitte etwas in alle Felder ein</ausgabetext>";
+    echo "Gib bitte etwas in alle Felder ein";
   }
 }
     ?>
