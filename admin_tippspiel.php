@@ -4,8 +4,6 @@
   <img class="falgge" src="Bilder/flagge_suedtirol.png" alt="Südtirol">
 </div>
 
-
-
 <?php
 require_once('datenbank.php');
 require_once('fussballspiel.php');
@@ -15,10 +13,6 @@ if(!isset($_SESSION["nickname"])){
   header("Location: login.php");
   exit;
 }
-$benutzer = $_SESSION["benutzer"];
-if($benutzer != "admin"){
-  header("Location: tippspiel.php");
-}else{
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +24,6 @@ if($benutzer != "admin"){
   </head>
   <body>
 
-    <!-- Ausgabe von Name und Punktestand -->
     <div class="benutzer">
     <text id="nutzername"></text><br>
     <script>document.getElementById("nutzername").innerHTML = "Angemeldet als: <?php echo $benutzer ?>";</script>
@@ -42,9 +35,18 @@ if($benutzer != "admin"){
       </div>
     </div>
 
+
     <form method="post">
-      <button type="submit" name="button" onclick="neuesAdminFeld()">Spiel erstellen</button>
+      <button type="submit" name="hund" onclick="neuesAdminFeld()">Spiel erstellen</button>
     </form>
+
+    <?php
+
+
+    if(isset($_POST["spielErstellen"])){
+      echo "jaja Hund";
+}
+     ?>
 
   </body>
 </html>

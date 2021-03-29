@@ -98,7 +98,6 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
     </form><br>
   </div>
     <!-- //Ausgabe: Mannschaft A spielt gegen Mannschaft b am "Datum" umd "Uhrzeit" -->
-<<<<<<< HEAD
 
       <script>
         document.getElementById("spiel<?php echo $i?>").innerHTML =
@@ -108,21 +107,10 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
   <?php
     }else {//Wenn Tipp schon abgegeben wurde
   ?>
-=======
->>>>>>> 1a54cf5884d3f64e9a63399b6ffa098b5dfd387e
     <script>
       document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben";
     </script>
-<<<<<<< HEAD
   </div>
-=======
-    <?php
-}else {//Wenn Tipp schon abgegeben wurde
-  ?>
-  <script>
-  document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben";
-  </script>
->>>>>>> 1a54cf5884d3f64e9a63399b6ffa098b5dfd387e
 <?php
 }
 }
@@ -132,7 +120,6 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
 
 //Wenn "Tipp Abgeben" button geklickt wird, dann die zahlen der zwei felder in datenbank eintragen
   if(isset($_POST["tippen_bt"])){
-    // echo $_POST["spiel_bt"];
     if(is_numeric($_POST["tippA"]) && is_numeric($_POST["tippB"])){//Überprüfen ob die eingabe eine Zahl ist
       if($_POST["tippA"] <= 50 && $_POST["tippB"] <= 50){//Überprüfen ob die Eingabe 50 nicht übersteigt
         $tA = $_POST["tippA"]; //Eingabe A
