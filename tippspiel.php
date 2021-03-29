@@ -16,6 +16,9 @@ if(!isset($_SESSION["nickname"])){
   exit;
 }
 $benutzer = $_SESSION["benutzer"];
+if($benutzer == "admin"){
+  header("Location: admin_tippspiel.php");
+}else{
 
 //Punktestand des Benutzes
 $stmt = $db->prepare("SELECT punktestand FROM `benutzer` WHERE benutzer.nickname = '$benutzer'");
@@ -95,6 +98,7 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
     </form><br>
   </div>
     <!-- //Ausgabe: Mannschaft A spielt gegen Mannschaft b am "Datum" umd "Uhrzeit" -->
+<<<<<<< HEAD
 
       <script>
         document.getElementById("spiel<?php echo $i?>").innerHTML =
@@ -104,10 +108,21 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
   <?php
     }else {//Wenn Tipp schon abgegeben wurde
   ?>
+=======
+>>>>>>> 1a54cf5884d3f64e9a63399b6ffa098b5dfd387e
     <script>
       document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben";
     </script>
+<<<<<<< HEAD
   </div>
+=======
+    <?php
+}else {//Wenn Tipp schon abgegeben wurde
+  ?>
+  <script>
+  document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben";
+  </script>
+>>>>>>> 1a54cf5884d3f64e9a63399b6ffa098b5dfd387e
 <?php
 }
 }
@@ -134,6 +149,7 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
       echo "<text class='fehlermedlung'>Deine Tipps müssen schon Zahlen sein</text>";
     }
   }
+}
 
 
 

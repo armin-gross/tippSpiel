@@ -62,6 +62,10 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 }
 }
 
-  function loescheButton(i){
-    document.getElementById("spiel2_bt").remove();
-  }
+
+function neuesAdminFeld(i){
+//erstellen von label und eingabe feld des Team A
+  nameTeamA = document.createElement("input");
+  nameTeamA.setAttribute('placeholder', "Mannschaft A");
+
+}

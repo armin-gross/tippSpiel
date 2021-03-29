@@ -43,7 +43,7 @@ if($_POST["nickname"] != null && $_POST["password"] != null){
       $pwHash = password_hash($_POST["password"], PASSWORD_DEFAULT); //Passwort wird gehasht
       $stmt->bindParam(":passwort", $pwHash);
       $stmt->execute();
-      echo "Dein Account wurde Angelegt";
+      header("Location: login.php");
 
     }else
       echo "Die Passwörter stimmen nicht überein";
