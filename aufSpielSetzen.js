@@ -63,5 +63,5 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 }
 
   function loescheButton(i){
-    document.getElementById("spiel"+i+"_bt").remove();
+    document.getElementById("spiel2_bt").remove();
   }

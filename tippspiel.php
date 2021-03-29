@@ -72,11 +72,18 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
       $spiel = new fussballspiel($i, $db);
       $mA = $spiel->getManschaft('a');
       $mB = $spiel->getManschaft('b');
+
+      $stmt = $db->prepare("SELECT b_f_id FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
+      $stmt->execute();
+      $fußballspielBenutzer = $stmt->rowCount();
     ?>
     <!-- Ausgabe des spiels an stelle $i -->
     <h3>Fußballspiel <?php echo $i?>:</h3>
     <p id="spiel<?php echo $i?>"></p>
 
+    <?php
+      if($fußballspielBenutzer == 0){ //Überprüfen ob Tipp nicht schon abgegeben wurde
+    ?>
     <form method="post">
     <input name="welchesSpiel" value="<?php echo $i?>" readonly size="1px"><!-- input um zu wissen, wessen spiels button geklickt wurde -->
     <button type="submit" id="spiel<?php echo $i?>_bt" name="spiel_bt"
@@ -91,21 +98,14 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
     </script>
   </div>
     <?php
-  }
-
-
-
-  // $w_spiel = $_POST["welchesSpiel"]; //Id des Spiels dessen Button geklickt wurde
-
-  // überprüfen ob Benutzer schon auf Spiele getippt hat
-  // $stmt = $db->prepare("SELECT * FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $w_spiel");
-  // $stmt->execute();
-  // $BenutzerTippsAufSpiel = $stmt->rowCount();
-  //  if($BenutzerTippsAufSpiel != 0){
-  //    ?>
-  <!--     <script>loescheButton(<?php //echo $w_spiel ?>)</script> -->
-      <?php
-  //  }
+}else {//Wenn Tipp schon abgegeben wurde
+  ?>
+  <script>
+  document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben";
+  </script>
+<?php
+}
+}
 
 
 
@@ -119,10 +119,9 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
         $tB = $_POST["tippB"]; //Eingabe B
         $benutzer_id;  //Id von Benutzer
         $w_spiel = $_POST["welchesSpiel"]; //Spiel dessen Button geklickt wurde
-        // echo $test;
-        echo $w_spiel;
         $stmt = $db->prepare("INSERT INTO benutzer_tippt_fußballspiel (tipp_a, tipp_b, b_id, f_id) values ($tA, $tB, $benutzer_id, $w_spiel)");
         $stmt->execute();
+        header("Location: tippspiel.php");
     }else {
       echo "Deine Tipps dürfen nicht höher als 50 sein";
     }
