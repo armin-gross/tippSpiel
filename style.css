@@ -132,6 +132,69 @@ button:hover{
 
 
 }
+.fußbalspielebox{
+  text-align: center;
+  /*border: 5px solid black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 50px;
+  padding-left: 50px;*/
+}
+.fußbalspielinsidebox{
+  /*Box*/
+  margin: auto;
+  width: 800px;
+  height: 200px;
+  border: 5px solid black;
+  padding-left: 200px;
+  padding-right: 200px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-bottom: 10%;
+  /*Text*/
+  font-family: fantasy;
+  text-decoration: none;
+}
+.fußbalspielinsidebox p {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  margin-left: 250px;;
+  margin-right: 250px;
+}
+.button_2{
+  text-align: center;
+  font-size: 15px;
+  font-family: fantasy;
+  border: none;
+  color: white;
+  background-color: #ec0030;
+  height: 40px;
+  width: 180px;
+  margin-top: 30px;
+}
+#tippen_bt {
+  text-align: center;
+  font-size: 15px;
+  font-family: fantasy;
+  border: none;
+  color: white;
+  background-color: #ec0030;
+  height: 40px;
+  width: 180px;
+  margin-top: 30px;
+}
+#tippen_bt:hover{
+  background: white;
+  color: #ec0030;
+  border: 2px solid black;
+}
+.nummerbox{
+  border: none;
+  text-align: center;
+  font-size: 25px;
+  font-family: fantasy;
+  text-decoration: none;
+}
 
 /*Dropdown*/
 .dropdown {

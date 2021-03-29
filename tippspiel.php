@@ -77,7 +77,10 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
       $stmt->execute();
       $fußballspielBenutzer = $stmt->rowCount();
     ?>
+    <div class="fußbalspielebox">
     <!-- Ausgabe des spiels an stelle $i -->
+  <div class="fußbalspielinsidebox">
+
     <h3>Fußballspiel <?php echo $i?>:</h3>
     <p id="spiel<?php echo $i?>"></p>
 
@@ -85,24 +88,26 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
       if($fußballspielBenutzer == 0){ //Überprüfen ob Tipp nicht schon abgegeben wurde
     ?>
     <form method="post">
-    <input name="welchesSpiel" value="<?php echo $i?>" readonly size="1px"><!-- input um zu wissen, wessen spiels button geklickt wurde -->
-    <button type="submit" id="spiel<?php echo $i?>_bt" name="spiel_bt"
+    <input class="nummerbox" name="welchesSpiel" value="<?php echo $i?>" readonly size="1px"><!-- input um zu wissen, wessen spiels button geklickt wurde -->
+    <button class="button_2" type="submit" id="spiel<?php echo $i?>_bt" name="spiel_bt"
     onclick=neuesFeld(<?php echo $i?>,"<?php echo $mA; ?>","<?php echo $mB; ?>",<?php echo $anzahlSpiele; ?>)
     >Wette auf diesem Spiel platzieren</button><!-- button der onclick i, mannschaftA, mannschaftB und anzahlSpiele übergibt -->
     </form><br>
+  </div>
     <!-- //Ausgabe: Mannschaft A spielt gegen Mannschaft b am "Datum" umd "Uhrzeit" -->
-  <div class="">
+
+      <script>
+        document.getElementById("spiel<?php echo $i?>").innerHTML =
+        "<?php echo $mA; ?> gegen <?php echo $mB; ?>, gespielt wird am <?php echo $spiel->getDatum(); ?> um <?php echo $spiel->getuhrzeit(); ?> Uhr";
+        </script>
+
+  <?php
+    }else {//Wenn Tipp schon abgegeben wurde
+  ?>
     <script>
-    document.getElementById("spiel<?php echo $i?>").innerHTML =
-    "<?php echo $mA; ?> gegen <?php echo $mB; ?>, gespielt wird am <?php echo $spiel->getDatum(); ?> um <?php echo $spiel->getuhrzeit(); ?> Uhr";
+      document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben";
     </script>
   </div>
-    <?php
-}else {//Wenn Tipp schon abgegeben wurde
-  ?>
-  <script>
-  document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben";
-  </script>
 <?php
 }
 }
@@ -123,10 +128,10 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
         $stmt->execute();
         header("Location: tippspiel.php");
     }else {
-      echo "Deine Tipps dürfen nicht höher als 50 sein";
+      echo "<text class='fehlermedlung'>Deine Tipps dürfen nicht höher als 50 sein</text>";
     }
     }else {
-      echo "Deine Tipps müssen schon Zahlen sein";
+      echo "<text class='fehlermedlung'>Deine Tipps müssen schon Zahlen sein</text>";
     }
   }
 

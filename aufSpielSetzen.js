@@ -27,7 +27,7 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 
 // Button um Tipp in Datenbank einzutragen
   tippen_bt = document.createElement("button");
-  tippen_bt.setAttribute('id', 'tippen_bt1');
+  tippen_bt.setAttribute('id', 'tippen_bt');
   tippen_bt.setAttribute('name', 'tippen_bt');
   tippen_bt.textContent = "Tipp Abgeben";
 
