@@ -97,6 +97,7 @@ function neuesAdminFeld(i){
   spielErstellen.setAttribute('id', 'spielErstellen');
   spielErstellen.setAttribute('name', 'spielErstellen');
   spielErstellen.textContent = "Spiel erstellen";
+  spielErstellen.form
 
 
 
