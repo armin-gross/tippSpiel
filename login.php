@@ -40,7 +40,11 @@ require_once('datenbank.php');
       session_start();
       $_SESSION["nickname"] = $row["nickname"];
       $_SESSION["benutzer"] = $_POST["nickname"];
+      if ($_SESSION["nickname"] == "admin") {
+        header("Location: admin_tippspiel.php");
+      }else{
       header("Location: tippspiel.php");
+      }
 
     }else{ //Passwort stimmt nicht
       echo "<text class='fehlermedlung' >Der Nutzername und/oder das Passwort ist falsch</text>";

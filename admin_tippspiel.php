@@ -13,6 +13,8 @@ if(!isset($_SESSION["nickname"])){
   header("Location: login.php");
   exit;
 }
+$benutzer = $_SESSION["benutzer"];
+
 
 ?>
 <!DOCTYPE html>
@@ -37,7 +39,7 @@ if(!isset($_SESSION["nickname"])){
 
 
     <form method="post">
-      <button type="submit" name="hund" onclick="neuesAdminFeld()">Spiel erstellen</button>
+      <button type="submit" name="spiel_erstellen_Felder_button" onclick="neuesFeld(1,2,3,2)">Spiel erstellen</button>
     </form>
 
     <?php

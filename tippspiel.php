@@ -16,9 +16,6 @@ if(!isset($_SESSION["nickname"])){
   exit;
 }
 $benutzer = $_SESSION["benutzer"];
-if($benutzer == "admin"){
-  header("Location: admin_tippspiel.php");
-}else{
 
 //Punktestand des Benutzes
 $stmt = $db->prepare("SELECT punktestand FROM `benutzer` WHERE benutzer.nickname = '$benutzer'");
@@ -136,7 +133,6 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
       echo "<text class='fehlermedlung'>Deine Tipps müssen schon Zahlen sein</text>";
     }
   }
-}
 
 
 
