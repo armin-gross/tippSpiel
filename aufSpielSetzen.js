@@ -63,7 +63,7 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 }
 
 
-function neuesAdminFeld(){
+function neuesAdminFeld(i){
 
   neuesTeamA = document.createElement("input");
   neuesTeamA.setAttribute('id', "neuesTeamA");
@@ -94,11 +94,13 @@ function neuesAdminFeld(){
   wortTore.textContent = " Tore. ";
 
   spielErstellen = document.createElement("button");
-  spielErstellen.setAttribute('name', 'spielErstellen');
   spielErstellen.setAttribute('id', 'spielErstellen');
-  spielErstellen.setAttribute('type', 'submit');
+  spielErstellen.setAttribute('name', 'spielErstellen');
   spielErstellen.textContent = "Spiel erstellen";
 
+
+
+    let spiel = document.getElementById("spiel_erstellen_Felder_button");
 
   document.getElementsByTagName('body')[0].appendChild(neuesTeamA);
   document.getElementsByTagName('body')[0].appendChild(wortSchisst);
@@ -109,4 +111,7 @@ function neuesAdminFeld(){
   document.getElementsByTagName('body')[0].appendChild(teamBTore);
   document.getElementsByTagName('body')[0].appendChild(wortTore);
   document.getElementsByTagName('body')[0].appendChild(spielErstellen);
+
+
+    spiel.parentNode.insertBefore(spielErstellen, spiel);
 }

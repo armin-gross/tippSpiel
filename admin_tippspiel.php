@@ -14,7 +14,10 @@ if(!isset($_SESSION["nickname"])){
   exit;
 }
 $benutzer = $_SESSION["benutzer"];
-
+$benutzer = $_SESSION["benutzer"];
+if($benutzer != "admin"){
+  header("Location: tippspiel.php");
+}
 
 ?>
 <!DOCTYPE html>
@@ -38,8 +41,9 @@ $benutzer = $_SESSION["benutzer"];
     </div>
 
 
-    <form method="post">
-      <button type="submit" name="spiel_erstellen_Felder_button" onclick="neuesFeld(1,2,3,2)">Spiel erstellen</button>
+
+    <form method="post" id="form_spiel_erstellen">
+      <button type="button" name="spiel_erstellen_Felder_button" id="spiel_erstellen_Felder_button" onclick=neuesAdminFeld(1) style="margin-top: 100px;">Spiel erstellen</button>
     </form>
 
     <?php
