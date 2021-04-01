@@ -49,30 +49,60 @@ if($benutzer != "admin"){
     <?php
 
     if(isset($_POST["teamsEintragen"])){
-        $teamA = $_POST["neuesTeamA"];
-        $teamB = $_POST["neuesTeamB"];
-        echo "Team a: ".$teamA." ";
-        echo "Team B: ".$teamB." ";
-      ?>
-      <script> neuesErgebnisAdmin("<?php echo $teamA ?>", "<?php echo $teamB ?>") </script>
-      <?php
-}
+      if(!empty($_POST["neuesTeamA"]) && !empty($_POST["neuesTeamB"]) && !ctype_space($_POST["neuesTeamA"]) && !ctype_space($_POST["neuesTeamB"])){
+          $_SESSION["teamA"] = $_POST["neuesTeamA"];
+          $_SESSION["teamB"] = $_POST["neuesTeamB"];
+          $teamA = $_SESSION["teamA"];
+          $teamB = $_SESSION["teamB"];
+          $stmt = $db->prepare("INSERT INTO mannschaft (nickname) VALUES ('$teamA'),('$teamB')");
+          $stmt->execute();
+          ?> <script> neuesErgebnisAdmin("<?php echo $_SESSION["teamA"] ?>", "<?php echo $_SESSION["teamB"] ?>") </script> <?php
+        }else{
+          echo "Bitte gib in beide Felder etwas ein";
+          ?> <script> neueManschaftenAdmin() </script> <?php
+        }
+      }
 
     if(isset($_POST["toreEintragen"])){
-        $teamA = $_POST["neuesTeamA"];
-        $teamB = $_POST["neuesTeamB"];
-        echo $teamA;
-        echo $teamB;
-      ?>
-      <script> datumUhrzeit() </script>
-      <?php
-}
+      if(!empty($_POST["toreTeamA"]) && !empty($_POST["toreTeamB"])){
+        if(is_numeric($_POST["toreTeamA"]) && is_numeric($_POST["toreTeamB"])){
+          if($_POST["toreTeamA"] <= 50 && $_POST["toreTeamB"] <= 50){
+              $_SESSION["toreTeamA"] = $_POST["toreTeamA"];
+              $_SESSION["toreTeamB"] = $_POST["toreTeamB"];
+              ?> <script> datumUhrzeit() </script> <?php
+            }else{
+              echo "Die Eingabe darf 50 nicht übersteigen";
+              ?> <script> neuesErgebnisAdmin("<?php echo $_SESSION["teamA"] ?>", "<?php echo $_SESSION["teamB"] ?>") </script> <?php
+            }
+          }else{
+            echo "Die Eingabe muss eine Zahl sein";
+            ?> <script> neuesErgebnisAdmin("<?php echo $_SESSION["teamA"] ?>", "<?php echo $_SESSION["teamB"] ?>") </script> <?php
+          }
+        }else {
+          echo "Bitte gib in beide Felder etwas ein";
+        }
+      }
 
-    if(isset($_POST["toreEintragen"])){
-      $teamA = $_POST["neuesTeamA"];
-      $teamB = $_POST["neuesTeamB"];
-      echo $teamA;
-      echo $teamB;
+
+    if(isset($_POST["datumUhrzeitEintragen"])){
+      if(!empty($_POST["uhrzeit"]) && !empty($_POST["datum"])){
+        $teamA = $_SESSION["teamA"];
+        $teamB = $_SESSION["teamB"];
+        $toreTeamA = $_SESSION["toreTeamA"];
+        $toreTeamB = $_SESSION["toreTeamB"];
+        $datum = $_POST["datum"];
+        $uhrzeit = $_POST["uhrzeit"];
+        $stmt = $db->prepare("INSERT INTO fußballspiel(tag, zeit, ergebnis_a, ergebnis_b, m_id_a, m_id_b) VALUES
+                            ('$datum', '$uhrzeit', $toreTeamA, $toreTeamB,
+                            (SELECT mannschaft.m_id from mannschaft where mannschaft.nickname = '$teamA'),
+                            (SELECT mannschaft.m_id from mannschaft where mannschaft.nickname = '$teamB'))"
+                            );
+        $stmt->execute();
+        echo "Neues Fußballspiel wurde Erfolgreich hinzugefügt";
+    }else {
+      echo "Bitte gib Datum und Uhrzeit an";
+      ?> <script> datumUhrzeit() </script> <?php
+    }
 }
      ?>
 
