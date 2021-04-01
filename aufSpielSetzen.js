@@ -63,56 +63,160 @@ function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele){
 }
 
 
-function neuesAdminFeld(i){
 
+function neueManschaftenAdmin(){
+
+//Formular
+  f = document.createElement("form");
+  f.setAttribute('method',"post");
+  f.setAttribute('id',"formularTeams");
+
+  teamAheisst = document.createElement("label");
+  teamAheisst.textContent = "Was ist der Name von Team A? ";
+
+//input Feld name Team A
   neuesTeamA = document.createElement("input");
   neuesTeamA.setAttribute('id', "neuesTeamA");
-  neuesTeamA.setAttribute('placeholder', "Mannschaft A");
+  neuesTeamA.setAttribute('name', "neuesTeamA");
+  neuesTeamA.setAttribute('placeholder', "Team A");
 
-  wortSchisst = document.createElement("label");
-  wortSchisst.textContent = " schießt ";
+  absatz1 = document.createElement("br");
+  absatz2 = document.createElement("br");
 
-  teamATore = document.createElement("input");
-  teamATore.setAttribute('id', "teamATore");
-  teamATore.setAttribute('placeholder', "0,1,2..");
+  teamBheisst = document.createElement("label");
+  teamBheisst.textContent = "Was ist der Name von Team B? ";
 
-  wortToreUnd = document.createElement("label");
-  wortToreUnd.textContent = " Tore und ";
-
+//input Feld name Team A
   neuesTeamB = document.createElement("input");
   neuesTeamB.setAttribute('id', "neuesTeamB");
-  neuesTeamB.setAttribute('placeholder', "Mannschaft B");
+  neuesTeamB.setAttribute('name', "neuesTeamB");
+  neuesTeamB.setAttribute('placeholder', "Team B");
 
-  wortSchisst2 = document.createElement("label");
-  wortSchisst2.textContent = " schießt ";
+//Button um spel in Datenbank einzutragen
+  teamsEintragen = document.createElement("button");
+  teamsEintragen.setAttribute('id', 'teamsEintragen');
+  teamsEintragen.setAttribute('name', 'teamsEintragen');
+  teamsEintragen.textContent = "Teams Eintragen";
 
-  teamBTore = document.createElement("input");
-  teamBTore.setAttribute('id', "teamBTore");
-  teamBTore.setAttribute('placeholder', "0,1,2..");
+//alles wird dem formular hinzugefügt
+  f.appendChild(teamAheisst);
+  f.appendChild(neuesTeamA);
+  f.appendChild(absatz1);
+  f.appendChild(teamBheisst);
+  f.appendChild(neuesTeamB);
+  f.appendChild(absatz2);
+  f.appendChild(teamsEintragen);
 
-  wortTore = document.createElement("label");
-  wortTore.textContent = " Tore. ";
+  //formular zu body hinzufügen
+  document.getElementsByTagName('body')[0].appendChild(f);
 
-  spielErstellen = document.createElement("button");
-  spielErstellen.setAttribute('id', 'spielErstellen');
-  spielErstellen.setAttribute('name', 'spielErstellen');
-  spielErstellen.textContent = "Spiel erstellen";
-  spielErstellen.form
-
-
-
-    let spiel = document.getElementById("spiel_erstellen_Felder_button");
-
-  document.getElementsByTagName('body')[0].appendChild(neuesTeamA);
-  document.getElementsByTagName('body')[0].appendChild(wortSchisst);
-  document.getElementsByTagName('body')[0].appendChild(teamATore);
-  document.getElementsByTagName('body')[0].appendChild(wortToreUnd);
-  document.getElementsByTagName('body')[0].appendChild(neuesTeamB);
-  document.getElementsByTagName('body')[0].appendChild(wortSchisst2);
-  document.getElementsByTagName('body')[0].appendChild(teamBTore);
-  document.getElementsByTagName('body')[0].appendChild(wortTore);
-  document.getElementsByTagName('body')[0].appendChild(spielErstellen);
-
-
-    spiel.parentNode.insertBefore(spielErstellen, spiel);
+//button der diese function ausführt wird entfernt
+  document.getElementById("spiel_erstellen_Felder_button").remove();
 }
+
+
+
+
+
+
+function neuesErgebnisAdmin(teamA, teamB){
+
+//Formular
+  f = document.createElement("form");
+  f.setAttribute('method',"post");
+  f.setAttribute('id',"formularTore");
+
+  teamAschiesst = document.createElement("label");
+  teamAschiesst.textContent = "Wie viele Tore schießt "+teamA+" ";
+
+//input Feld name Team A
+  toreTeamA = document.createElement("input");
+  toreTeamA.setAttribute('id', "toreTeamA");
+  toreTeamA.setAttribute('name', "toreTeamA");
+  toreTeamA.setAttribute('placeholder', "Tore "+teamA+" ");
+
+  absatz1 = document.createElement("br");
+  absatz2 = document.createElement("br");
+
+  teamBschiesst = document.createElement("label");
+  teamBschiesst.textContent = "Wie viele Tore schießt "+teamB+" ";
+
+//input Feld name Team A
+  toreTeamB = document.createElement("input");
+  toreTeamB.setAttribute('id', "toreTeamB");
+  toreTeamB.setAttribute('name', "toreTeamB");
+  toreTeamB.setAttribute('placeholder', "Tore "+teamB+" ");
+
+//Button um spel in Datenbank einzutragen
+  toreEintragen = document.createElement("button");
+  toreEintragen.setAttribute('id', 'toreEintragen');
+  toreEintragen.setAttribute('name', 'toreEintragen');
+  toreEintragen.textContent = "Tore Eintragen";
+
+//alles wird dem formular hinzugefügt
+  f.appendChild(teamAschiesst);
+  f.appendChild(toreTeamA);
+  f.appendChild(absatz1);
+  f.appendChild(teamBschiesst);
+  f.appendChild(toreTeamB);
+  f.appendChild(absatz1);
+  f.appendChild(toreEintragen);
+
+  //formular zu body hinzufügen
+  document.getElementsByTagName('body')[0].appendChild(f);
+}
+
+
+
+
+
+
+
+
+
+
+function datumUhrzeit(){
+  //Formular
+    f = document.createElement("form");
+    f.setAttribute('method',"post");
+    f.setAttribute('id',"datumUhrzeit");
+
+    uhrzeit_lbl = document.createElement("label");
+    uhrzeit_lbl.textContent = "Um wie spät findet das Spiel statt?";
+
+  //input Feld name Team A
+    uhrzeit = document.createElement("input");
+    uhrzeit.setAttribute('id', "uhrzeit");
+    uhrzeit.setAttribute('name', "uhrzeit");
+    uhrzeit.setAttribute('placeholder', "Uhrzeit");
+
+    absatz1 = document.createElement("br");
+    absatz2 = document.createElement("br");
+
+    datum_lbl = document.createElement("label");
+    datum_lbl.textContent = "Wann findet das Spiel statt?";
+
+  //input Feld name Team A
+    datum = document.createElement("input");
+    datum.setAttribute('id', "datum");
+    datum.setAttribute('name', "datum");
+    datum.setAttribute('placeholder', "Datum");
+
+  //Button um spel in Datenbank einzutragen
+    datumUhrzeitEintragen = document.createElement("button");
+    datumUhrzeitEintragen.setAttribute('id', 'datumUhrzeitEintragen');
+    datumUhrzeitEintragen.setAttribute('name', 'datumUhrzeitEintragen');
+    datumUhrzeitEintragen.textContent = "Datum und Uhrzeit Eintragen";
+
+  //alles wird dem formular hinzugefügt
+    f.appendChild(uhrzeit_lbl);
+    f.appendChild(uhrzeit);
+    f.appendChild(absatz1);
+    f.appendChild(datum_lbl);
+    f.appendChild(datum);
+    f.appendChild(absatz2);
+    f.appendChild(datumUhrzeitEintragen);
+
+    //formular zu body hinzufügen
+    document.getElementsByTagName('body')[0].appendChild(f);
+  }

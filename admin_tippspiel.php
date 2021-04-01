@@ -43,14 +43,36 @@ if($benutzer != "admin"){
 
 
     <form method="post" id="form_spiel_erstellen">
-      <button type="button" name="spiel_erstellen_Felder_button" id="spiel_erstellen_Felder_button" onclick=neuesAdminFeld(1) style="margin-top: 100px;">Spiel erstellen</button>
+      <button type="button" name="spiel_erstellen_Felder_button" id="spiel_erstellen_Felder_button" onclick=neueManschaftenAdmin() style="margin-top: 100px;">Spiel erstellen</button>
     </form>
 
     <?php
 
+    if(isset($_POST["teamsEintragen"])){
+        $teamA = $_POST["neuesTeamA"];
+        $teamB = $_POST["neuesTeamB"];
+        echo "Team a: ".$teamA." ";
+        echo "Team B: ".$teamB." ";
+      ?>
+      <script> neuesErgebnisAdmin("<?php echo $teamA ?>", "<?php echo $teamB ?>") </script>
+      <?php
+}
 
-    if(isset($_POST["spielErstellen"])){
-      echo "jaja Hund";
+    if(isset($_POST["toreEintragen"])){
+        $teamA = $_POST["neuesTeamA"];
+        $teamB = $_POST["neuesTeamB"];
+        echo $teamA;
+        echo $teamB;
+      ?>
+      <script> datumUhrzeit() </script>
+      <?php
+}
+
+    if(isset($_POST["toreEintragen"])){
+      $teamA = $_POST["neuesTeamA"];
+      $teamB = $_POST["neuesTeamB"];
+      echo $teamA;
+      echo $teamB;
 }
      ?>
 
