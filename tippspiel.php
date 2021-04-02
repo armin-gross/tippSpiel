@@ -73,7 +73,6 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
 
     for ($i=1; $i <= $anzahlSpiele; $i++) {
       $spiel = new fussballspiel($i, $db);
-        if($spiel->getManschaft('a') != null && $spiel->getManschaft('b') != null){
           $mA = $spiel->getManschaft('a');
           $mB = $spiel->getManschaft('b');
 
@@ -88,6 +87,7 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
           $aktuelleUhrzeit = date("H:i",$timestamp);
           $spielDatum = $spiel->getDatum();
           $spielUhrzeit = $spiel->getUhrzeit();
+          if($mA != "keine Mannschaft"){
           ?>
           <div class="fußbalspielebox">
             <!-- Ausgabe des spiels an stelle $i -->
@@ -118,18 +118,12 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
 
                     <?php
                     //Wenn Tipp Abgegeben
-                    }else { ?> <script> document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben"; </script> </div> <?php }
+                    }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML = "Tipp abgegeben"; </script> </div> <?php }
                     //Wenn spiel bereits stattgefunden hat
-                  }else { ?> <script> document.getElementById("spiel<?php echo $i?>").innerHTML = "Spiel hat bereits stattgefunden"; </script> </div> <?php }
-                }else { ?> <script> document.getElementById("spiel<?php echo $i?>").innerHTML = "Spiel hat bereits stattgefunden"; </script> </div> <?php }
-              }
+                  }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML = "Spiel hat bereits stattgefunden"; </script> </div> <?php }
+                }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML = "Spiel hat bereits stattgefunden"; </script> </div> <?php }
             }
-
-$stmt = $db->prepare("INSERT INTO mannschaft (nickname) VALUES (:teamA, :teamB)");
-$stmt->bindParam("teamA", $_SESSION["teamA"]);
-$stmt->bindParam("teamB", $_SESSION["teamB"]);
-
-
+          }
 
 //Wenn "Tipp Abgeben" button geklickt wird, dann die zahlen der zwei felder in datenbank eintragen
   if(isset($_POST["tippen_bt"])){

@@ -54,14 +54,34 @@ if($benutzer != "admin"){
           $_SESSION["teamB"] = $_POST["neuesTeamB"];
           $teamA = $_SESSION["teamA"];
           $teamB = $_SESSION["teamB"];
+
+          $stmt = $db->prepare("SELECT * FROM mannschaft WHERE mannschaft.nickname = '$teamA'"); //Überprüfen ob mannschaft bereits existiert
+          $stmt->execute();
+          $count = $stmt->rowCount();
+
+          $stmt2 = $db->prepare("SELECT * FROM mannschaft WHERE mannschaft.nickname = '$teamB'"); //Überprüfen ob mannschaft bereits existiert
+          $stmt2->execute();
+          $count2 = $stmt2->rowCount();
+
+          if($count == 0){
+            if($count2 == 0){
           $stmt = $db->prepare("INSERT INTO mannschaft (nickname) VALUES ('$teamA'),('$teamB')");
           $stmt->execute();
           ?> <script> neuesErgebnisAdmin("<?php echo $_SESSION["teamA"] ?>", "<?php echo $_SESSION["teamB"] ?>") </script> <?php
-        }else{
-          echo "Bitte gib in beide Felder etwas ein";
+        }else {
+          echo "Team B existiert bereits";
           ?> <script> neueManschaftenAdmin() </script> <?php
         }
+      }else {
+        echo "Team A existiert bereits";
+        ?> <script> neueManschaftenAdmin() </script> <?php
       }
+    }else{
+      echo "Bitte gib in beide Felder etwas ein";
+      ?> <script> neueManschaftenAdmin() </script> <?php
+    }
+  }
+
 
     if(isset($_POST["toreEintragen"])){
       if(!empty($_POST["toreTeamA"]) && !empty($_POST["toreTeamB"])){

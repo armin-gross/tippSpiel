@@ -19,7 +19,11 @@ function getManschaft($mannschaft){
     $stmt->execute();
     $spiel1_mannschaft = $stmt->fetch();
 }
-return $spiel1_mannschaft["nickname"];
+  if($spiel1_mannschaft != 0){
+    return $spiel1_mannschaft["nickname"];
+  }else {
+    return "keine Mannschaft";
+  }
 }
 
 
@@ -27,7 +31,11 @@ function getDatum(){
   $stmt = $this->db->prepare("SELECT `tag` FROM `fußballspiel` WHERE f_id = $this->spiel");
   $stmt->execute();
   $date = $stmt->fetch();
-  return $date["tag"];
+  if($date != 0){
+    return $date["tag"];
+  }else {
+    return "kein Datum";
+  }
 }
 
 
@@ -35,7 +43,12 @@ function getUhrzeit(){
   $stmt = $this->db->prepare("SELECT `zeit` FROM `fußballspiel` WHERE f_id = $this->spiel");
   $stmt->execute();
   $zeit = $stmt->fetch();
-  return $zeit["zeit"];
+
+  if($zeit != 0){
+    return $zeit["zeit"];
+  }else {
+    return "keine Zeit";
+  }
 }
 
 
