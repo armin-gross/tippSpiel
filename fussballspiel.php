@@ -31,7 +31,7 @@ function getDatum(){
 }
 
 
-function getuhrzeit(){
+function getUhrzeit(){
   $stmt = $this->db->prepare("SELECT `zeit` FROM `fußballspiel` WHERE f_id = $this->spiel");
   $stmt->execute();
   $zeit = $stmt->fetch();

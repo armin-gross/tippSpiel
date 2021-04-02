@@ -80,6 +80,17 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
           $stmt = $db->prepare("SELECT b_f_id FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
           $stmt->execute();
           $fußballspielBenutzer = $stmt->rowCount();
+
+
+          date_default_timezone_set("Europe/Berlin");
+          $timestamp = time();
+
+          $aktuellesDatum = date("Y-m-d",$timestamp);
+          $aktuelleUhrzeit = date("H:i",$timestamp);
+          $spielDatum = $spiel->getDatum();
+          $spielUhrzeit = $spiel->getUhrzeit();
+
+
           ?>
           <div class="fußbalspielebox">
             <!-- Ausgabe des spiels an stelle $i -->
@@ -89,33 +100,32 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
               <p id="spiel<?php echo $i?>"></p>
 
               <?php
-              if($fußballspielBenutzer == 0){ //Überprüfen ob Tipp nicht schon abgegeben wurde
-                ?>
-                <form method="post">
-                  <input class="nummerbox" name="welchesSpiel" value="<?php echo $i?>" readonly size="1px"><!-- input um zu wissen, wessen spiels button geklickt wurde -->
-                  <button class="button_2" type="button" id="spiel<?php echo $i?>_bt" name="spiel_bt"
-                    onclick=neuesFeld(<?php echo $i?>,"<?php echo $mA; ?>","<?php echo $mB; ?>",<?php echo $anzahlSpiele; ?>)
-                    >Wette auf diesem Spiel platzieren</button><!-- button der onclick i, mannschaftA, mannschaftB und anzahlSpiele übergibt -->
-                  </form><br>
-                </div>
-                <!-- //Ausgabe: Mannschaft A spielt gegen Mannschaft b am "Datum" umd "Uhrzeit" -->
+              if($aktuellesDatum <= $spielDatum){
+                if($aktuelleUhrzeit <= $spielUhrzeit || $aktuellesDatum < $spielDatum){
+                  if($fußballspielBenutzer == 0){ //Überprüfen ob Tipp nicht schon abgegeben wurde
+                    ?>
+                    <form method="post">
+                      <input class="nummerbox" name="welchesSpiel" value="<?php echo $i?>" readonly size="1px"><!-- input um zu wissen, wessen spiels button geklickt wurde -->
+                      <button class="button_2" type="button" id="spiel<?php echo $i?>_bt" name="spiel_bt"
+                        onclick=neuesFeld(<?php echo $i?>,"<?php echo $mA; ?>","<?php echo $mB; ?>",<?php echo $anzahlSpiele; ?>)
+                        >Wette auf diesem Spiel platzieren</button><!-- button der onclick i, mannschaftA, mannschaftB und anzahlSpiele übergibt -->
+                      </form><br>
+                    </div>
+                    <!-- //Ausgabe: Mannschaft A spielt gegen Mannschaft b am "Datum" umd "Uhrzeit" -->
 
-                <script>
-                document.getElementById("spiel<?php echo $i?>").innerHTML =
-                "<?php echo $mA; ?> gegen <?php echo $mB; ?>, gespielt wird am <?php echo $spiel->getDatum(); ?> um <?php echo $spiel->getuhrzeit(); ?> Uhr";
-                </script>
+                    <script>
+                    document.getElementById("spiel<?php echo $i?>").innerHTML =
+                    "<?php echo $mA; ?> gegen <?php echo $mB; ?>, gespielt wird am <?php echo $spiel->getDatum(); ?> um <?php echo $spiel->getuhrzeit(); ?> Uhr";
+                    </script>
 
-                <?php
-              }else {//Wenn Tipp schon abgegeben wurde
-                ?>
-                <script>
-                document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben";
-                </script>
-              </div>
-              <?php
+                    <?php
+                    //Wenn Tipp Abgegeben
+                    }else { ?> <script> document.getElementById("spiel<?php echo $i?>").innerHTML = "Tipp abgegeben"; </script> </div> <?php }
+                    //Wenn spiel bereits stattgefunden hat
+                  }else { ?> <script> document.getElementById("spiel<?php echo $i?>").innerHTML = "Spiel hat bereits stattgefunden"; </script> </div> <?php }
+                }else { ?> <script> document.getElementById("spiel<?php echo $i?>").innerHTML = "Spiel hat bereits stattgefunden"; </script> </div> <?php }
+              }
             }
-          }
-        }
 
 $stmt = $db->prepare("INSERT INTO mannschaft (nickname) VALUES (:teamA, :teamB)");
 $stmt->bindParam("teamA", $_SESSION["teamA"]);
