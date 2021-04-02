@@ -81,16 +81,13 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
           $stmt->execute();
           $fußballspielBenutzer = $stmt->rowCount();
 
-
+          //Erstellen von Datum und Uhrzeit
           date_default_timezone_set("Europe/Berlin");
           $timestamp = time();
-
           $aktuellesDatum = date("Y-m-d",$timestamp);
           $aktuelleUhrzeit = date("H:i",$timestamp);
           $spielDatum = $spiel->getDatum();
           $spielUhrzeit = $spiel->getUhrzeit();
-
-
           ?>
           <div class="fußbalspielebox">
             <!-- Ausgabe des spiels an stelle $i -->
@@ -100,6 +97,7 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
               <p id="spiel<?php echo $i?>"></p>
 
               <?php
+              //Überprüfen ob Datum und Uhrzeit noch nicht überstiegen wurden
               if($aktuellesDatum <= $spielDatum){
                 if($aktuelleUhrzeit <= $spielUhrzeit || $aktuellesDatum < $spielDatum){
                   if($fußballspielBenutzer == 0){ //Überprüfen ob Tipp nicht schon abgegeben wurde
@@ -144,16 +142,13 @@ $stmt->bindParam("teamB", $_SESSION["teamB"]);
         $stmt = $db->prepare("INSERT INTO benutzer_tippt_fußballspiel (tipp_a, tipp_b, b_id, f_id) values ($tA, $tB, $benutzer_id, $w_spiel)");
         $stmt->execute();
         header("Location: tippspiel.php");
-    }else {
+      }else {
       echo "<text class='fehlermedlung'>Deine Tipps dürfen nicht höher als 50 sein</text>";
+      }
+      }else {
+        echo "<text class='fehlermedlung'>Deine Tipps müssen schon Zahlen sein</text>";
+      }
     }
-    }else {
-      echo "<text class='fehlermedlung'>Deine Tipps müssen schon Zahlen sein</text>";
-    }
-  }
-
-
-
     ?>
 
   </body>
