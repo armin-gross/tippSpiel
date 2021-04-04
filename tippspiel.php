@@ -15,7 +15,10 @@ if(!isset($_SESSION["nickname"])){
   header("Location: login.php");
   exit;
 }
+
+$punkteGutgeschrieben = true;
 $benutzer = $_SESSION["benutzer"];
+require_once('ermittleGewinner.php');
 if($benutzer == "admin"){
   header("Location: admin_tippspiel.php");
 }
@@ -76,10 +79,6 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
           $mA = $spiel->getManschaft('a');
           $mB = $spiel->getManschaft('b');
 
-          $stmt = $db->prepare("SELECT b_f_id FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
-          $stmt->execute();
-          $fußballspielBenutzer = $stmt->rowCount();
-
           //Erstellen von Datum und Uhrzeit
           date_default_timezone_set("Europe/Berlin");
           $timestamp = time();
@@ -100,7 +99,12 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
               //Überprüfen ob Datum und Uhrzeit noch nicht überstiegen wurden
               if($aktuellesDatum <= $spielDatum){
                 if($aktuelleUhrzeit <= $spielUhrzeit || $aktuellesDatum < $spielDatum){
-                  if($fußballspielBenutzer == 0){ //Überprüfen ob Tipp nicht schon abgegeben wurde
+
+                  //Überprüfen ob Tipp nicht schon abgegeben wurde
+                  $stmt = $db->prepare("SELECT b_f_id FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
+                  $stmt->execute();
+                  $fußballspielBenutzer = $stmt->rowCount();
+                  if($fußballspielBenutzer == 0){
                     ?>
                     <form method="post">
                       <input class="nummerbox" name="welchesSpiel" value="<?php echo $i?>" readonly size="1px"><!-- input um zu wissen, wessen spiels button geklickt wurde -->
@@ -118,10 +122,29 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
 
                     <?php
                     //Wenn Tipp Abgegeben
-                    }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML = "Tipp abgegeben"; </script> </div> <?php }
+                  }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                  "Tipp abgegeben, Spiel findet am <?php echo $spielDatum ?> um <?php echo $spielUhrzeit ?> Uhr statt." ; </script> </div> <?php }
                     //Wenn spiel bereits stattgefunden hat
-                  }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML = "Spiel hat bereits stattgefunden"; </script> </div> <?php }
-                }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML = "Spiel hat bereits stattgefunden"; </script> </div> <?php }
+                  }else {
+                    if($punkteGutgeschrieben != true){
+                    $punkteAlt = $punktestand;
+                    ausgabePunkte($i, $db, $benutzer_id, $punktestand);
+                    $neuePunkte = $punktestand - $punkteAlt;
+                    ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                    "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script> </div> <?php
+                    $punkteGutgeschrieben = true;
+                    }
+                  }
+                }else {
+                  if($punkteGutgeschrieben != true){
+                  $punkteAlt = $punktestand;
+                  ausgabePunkte($i, $db, $benutzer_id, $punktestand);
+                  $neuePunkte = $punktestand - $punkteAlt;
+                  ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                  "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script> </div> <?php
+                  $punkteGutgeschrieben = true;
+                }
+              }
             }
           }
 
@@ -133,9 +156,14 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
         $tB = $_POST["tippB"]; //Eingabe B
         $benutzer_id;  //Id von Benutzer
         $w_spiel = $_POST["welchesSpiel"]; //Spiel dessen Button geklickt wurde
+
+        $stmt = $db->prepare("SELECT b_f_id FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $w_spiel");
+        $stmt->execute();
+        $fußballspielBenutzer = $stmt->rowCount();
+        if($fußballspielBenutzer == 0){
         $stmt = $db->prepare("INSERT INTO benutzer_tippt_fußballspiel (tipp_a, tipp_b, b_id, f_id) values ($tA, $tB, $benutzer_id, $w_spiel)");
         $stmt->execute();
-        header("Location: tippspiel.php");
+      }
       }else {
       echo "<text class='fehlermedlung'>Deine Tipps dürfen nicht höher als 50 sein</text>";
       }
