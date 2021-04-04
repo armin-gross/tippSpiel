@@ -3,6 +3,11 @@ require_once('tippspiel.php');
 require_once('datenbank.php');
 
   function ausgabePunkte($i, $db, $benutzer_id, $punktestand){
+    echo "<br />";
+    echo $benutzer_id;
+    echo "<br />";
+    echo $i;
+    echo "<br />";
     $stmt = $db->prepare("SELECT * FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
     $stmt->execute();
     $tipp_array = $stmt->fetch();
@@ -70,6 +75,22 @@ require_once('datenbank.php');
 
       $stmt = $db->prepare("UPDATE benutzer SET punktestand = $punktestand WHERE b_id = $benutzer_id");
       $stmt->execute();
+
+
+?>
+  <script>
+
+      let spiel = document.getElementById("spiel" + <?php echo $i ?> + "_bt");
+      let schonAbgegeben = document.createElement("input");
+      schonAbgegeben.setAttribute('id', "tippA");
+      schonAbgegeben.setAttribute('name', "tippA");
+      schonAbgegeben.setAttribute('type', "text");
+
+      document.getElementsByTagName('body')[0].appendChild(schonAbgegeben);
+      spiel.parentNode.insertBefore(nameTeamA, spiel);
+
+</script>
+<?php
   }
 
  ?>

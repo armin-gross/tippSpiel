@@ -16,7 +16,6 @@ if(!isset($_SESSION["nickname"])){
   exit;
 }
 
-$punkteGutgeschrieben = true;
 $benutzer = $_SESSION["benutzer"];
 require_once('ermittleGewinner.php');
 if($benutzer == "admin"){
@@ -36,10 +35,14 @@ $benutzer_id_array = $stmt->fetch();
 $benutzer_id = $benutzer_id_array["b_id"];
 
 //Anzahl an aufSpielSetzen
-$stmt = $db->prepare("SELECT max(f_id) FROM `fußballspiel`");
+// $stmt = $db->prepare("SELECT max(f_id) FROM `fußballspiel`");
+// $stmt->execute();
+// $anzahlSpiele_array = $stmt->fetch();
+// $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
+
+$stmt = $db->prepare("SELECT * FROM `fußballspiel`");
 $stmt->execute();
-$anzahlSpiele_array = $stmt->fetch();
-$anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
+$anzahlSpiele = $stmt->rowCount();
 
 
 ?>
@@ -122,29 +125,29 @@ $anzahlSpiele = $anzahlSpiele_array["max(f_id)"];
 
                     <?php
                     //Wenn Tipp Abgegeben
+                    $tippAbgegeben;
                   }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
                   "Tipp abgegeben, Spiel findet am <?php echo $spielDatum ?> um <?php echo $spielUhrzeit ?> Uhr statt." ; </script> </div> <?php }
+                  $tippAbgegeben = true;
                     //Wenn spiel bereits stattgefunden hat
                   }else {
-                    if($punkteGutgeschrieben != true){
+                    if($tippAbgegeben == true){
                     $punkteAlt = $punktestand;
                     ausgabePunkte($i, $db, $benutzer_id, $punktestand);
                     $neuePunkte = $punktestand - $punkteAlt;
                     ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
                     "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script> </div> <?php
-                    $punkteGutgeschrieben = true;
-                    }
+                  }
                   }
                 }else {
-                  if($punkteGutgeschrieben != true){
+                  if($tippAbgegeben == true){
                   $punkteAlt = $punktestand;
                   ausgabePunkte($i, $db, $benutzer_id, $punktestand);
                   $neuePunkte = $punktestand - $punkteAlt;
                   ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
                   "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script> </div> <?php
-                  $punkteGutgeschrieben = true;
-                }
               }
+            }
             }
           }
 

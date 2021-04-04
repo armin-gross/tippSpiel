@@ -40,6 +40,10 @@ require_once('datenbank.php');
       session_start();
       $_SESSION["nickname"] = $row["nickname"];
       $_SESSION["benutzer"] = $_POST["nickname"];
+
+      $stmt = $db->prepare("SELECT * FROM `fußballspiel`");
+      $stmt->execute();
+      $anzahlSpiele = $stmt->rowCount();
       if ($_SESSION["nickname"] == "admin") {
         header("Location: admin_tippspiel.php");
       }else{
