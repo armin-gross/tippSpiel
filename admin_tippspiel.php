@@ -65,9 +65,14 @@ if($benutzer != "admin"){
 
           if($count == 0){
             if($count2 == 0){
+              if($teamA != $teamB){
           $stmt = $db->prepare("INSERT INTO mannschaft (nickname) VALUES ('$teamA'),('$teamB')");
           $stmt->execute();
           ?> <script> neuesErgebnisAdmin("<?php echo $_SESSION["teamA"] ?>", "<?php echo $_SESSION["teamB"] ?>") </script> <?php
+        }else {
+          echo "Die Teams dürfen nicht den gleichen Namen haben";
+          ?> <script> neueManschaftenAdmin() </script> <?php
+        }
         }else {
           echo "Team B existiert bereits";
           ?> <script> neueManschaftenAdmin() </script> <?php

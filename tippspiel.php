@@ -125,29 +125,31 @@ $anzahlSpiele = $stmt->rowCount();
 
                     <?php
                     //Wenn Tipp Abgegeben
-                    $tippAbgegeben;
                   }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
                   "Tipp abgegeben, Spiel findet am <?php echo $spielDatum ?> um <?php echo $spielUhrzeit ?> Uhr statt." ; </script> </div> <?php }
-                  $tippAbgegeben = true;
                     //Wenn spiel bereits stattgefunden hat
                   }else {
-                    if($tippAbgegeben == true){
+                    static $hurensohn = "tepp";
+                    if($hurensohn != null){
                     $punkteAlt = $punktestand;
                     ausgabePunkte($i, $db, $benutzer_id, $punktestand);
-                    $neuePunkte = $punktestand - $punkteAlt;
+                    $hurensohn = null;
                     ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
-                    "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script> </div> <?php
+                    "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script> <?php
                   }
-                  }
+                  ?> </div> <?php
+              }
                 }else {
-                  if($tippAbgegeben == true){
+                  static $hurensohn = "tepp";
+                  if($hurensohn != null){
                   $punkteAlt = $punktestand;
                   ausgabePunkte($i, $db, $benutzer_id, $punktestand);
-                  $neuePunkte = $punktestand - $punkteAlt;
+                  $hurensohn = null;
                   ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
-                  "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script> </div> <?php
-              }
-            }
+                  "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script>  <?php
+                }
+                ?> </div> <?php
+          }
             }
           }
 
