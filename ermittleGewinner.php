@@ -3,11 +3,6 @@ require_once('tippspiel.php');
 require_once('datenbank.php');
 
   function ausgabePunkte($i, $db, $benutzer_id, $punktestand){
-    // echo "<br />";
-    // echo $benutzer_id;
-    // echo "<br />";
-    // echo $i;
-    // echo "<br />";
     $stmt = $db->prepare("SELECT * FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
     $stmt->execute();
     $tipp_array = $stmt->fetch();

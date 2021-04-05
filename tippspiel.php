@@ -142,9 +142,14 @@ $anzahlSpiele = $stmt->rowCount();
                     ausgabePunkte($i, $db, $benutzer_id, $punktestand);
                     $stmt = $db->prepare("UPDATE benutzer_tippt_fußballspiel SET punkteErhalten = true WHERE b_id = $benutzer_id and f_id = $i");
                     $stmt->execute();
-                    }
+                  }
+                  // else {
+                  //    ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                  //   "Du hast 30 punkte dafür bekommen" ; </script> </div> <?php
+                  // }
                   }else {
-                    echo "Auf das Spiel wurde nicht getippt";
+                    ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                    "Du hast auf dieses Spiel nicht getippt" ; </script> </div> <?php
                   }
                   ?> </div> <?php
               }
@@ -158,12 +163,21 @@ $anzahlSpiele = $stmt->rowCount();
                   $erhaltenArray = $stmt->fetch();
                   $erhalten = $erhaltenArray["punkteErhalten"];
                   if($erhalten == 0){
+                  $neuePunkte = $punktestand;
+                  echo $punktestand;
                   ausgabePunkte($i, $db, $benutzer_id, $punktestand);
+                  echo $punktestand;
+                  $neuePunkte = $punktestand - $neuePunkte;
                   $stmt = $db->prepare("UPDATE benutzer_tippt_fußballspiel SET punkteErhalten = true WHERE b_id = $benutzer_id and f_id = $i");
                   $stmt->execute();
                 }
+                // else {
+                //    ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                //    "Du hast 30 punkte dafür bekommen" ; </script> </div> <?php
+                // }
               }else {
-                echo "Auf das Spiel wurde nicht getippt";
+                ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                "Du hast auf dieses Spiel nicht getippt" ; </script> </div> <?php
               }
                 ?> </div> <?php
           }
