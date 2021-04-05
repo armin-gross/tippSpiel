@@ -125,29 +125,46 @@ $anzahlSpiele = $stmt->rowCount();
 
                     <?php
                     //Wenn Tipp Abgegeben
-                  }else { ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                  }else {
+                  ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
                   "Tipp abgegeben, Spiel findet am <?php echo $spielDatum ?> um <?php echo $spielUhrzeit ?> Uhr statt." ; </script> </div> <?php }
                     //Wenn spiel bereits stattgefunden hat
                   }else {
-                    static $hurensohn = "tepp";
-                    if($hurensohn != null){
-                    $punkteAlt = $punktestand;
+                    $stmt = $db->prepare("SELECT b_f_id FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
+                    $stmt->execute();
+                    $benutzerBereitsGetippt = $stmt->rowCount();
+                    if($benutzerBereitsGetippt == 1){
+                    $stmt = $db->prepare("SELECT * FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
+                    $stmt->execute();
+                    $erhaltenArray = $stmt->fetch();
+                    $erhalten = $erhaltenArray["punkteErhalten"];
+                    if($erhalten == 0){
                     ausgabePunkte($i, $db, $benutzer_id, $punktestand);
-                    $hurensohn = null;
-                    ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
-                    "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script> <?php
+                    $stmt = $db->prepare("UPDATE benutzer_tippt_fußballspiel SET punkteErhalten = true WHERE b_id = $benutzer_id and f_id = $i");
+                    $stmt->execute();
+                    }
+                  }else {
+                    echo "Auf das Spiel wurde nicht getippt";
                   }
                   ?> </div> <?php
               }
                 }else {
-                  static $hurensohn = "tepp";
-                  if($hurensohn != null){
-                  $punkteAlt = $punktestand;
+                  $stmt = $db->prepare("SELECT b_f_id FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
+                  $stmt->execute();
+                  $benutzerBereitsGetippt = $stmt->rowCount();
+                  if($benutzerBereitsGetippt == 1){
+                  $stmt = $db->prepare("SELECT * FROM benutzer_tippt_fußballspiel WHERE b_id = $benutzer_id and f_id = $i");
+                  $stmt->execute();
+                  $erhaltenArray = $stmt->fetch();
+                  $erhalten = $erhaltenArray["punkteErhalten"];
+                  if($erhalten == 0){
                   ausgabePunkte($i, $db, $benutzer_id, $punktestand);
-                  $hurensohn = null;
-                  ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
-                  "Spiel hat bereits stattgefunden, du hast <?php echo $neuePunkte ?> Punkte dafür bekommen"; </script>  <?php
+                  $stmt = $db->prepare("UPDATE benutzer_tippt_fußballspiel SET punkteErhalten = true WHERE b_id = $benutzer_id and f_id = $i");
+                  $stmt->execute();
                 }
+              }else {
+                echo "Auf das Spiel wurde nicht getippt";
+              }
                 ?> </div> <?php
           }
             }
@@ -166,7 +183,7 @@ $anzahlSpiele = $stmt->rowCount();
         $stmt->execute();
         $fußballspielBenutzer = $stmt->rowCount();
         if($fußballspielBenutzer == 0){
-        $stmt = $db->prepare("INSERT INTO benutzer_tippt_fußballspiel (tipp_a, tipp_b, b_id, f_id) values ($tA, $tB, $benutzer_id, $w_spiel)");
+        $stmt = $db->prepare("INSERT INTO benutzer_tippt_fußballspiel (tipp_a, tipp_b, b_id, f_id, punkteErhalten) values ($tA, $tB, $benutzer_id, $w_spiel, false)");
         $stmt->execute();
       }
       }else {
