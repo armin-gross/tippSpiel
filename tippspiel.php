@@ -9,6 +9,8 @@
 <?php
 require_once('datenbank.php');
 require_once('fussballspiel.php');
+require_once('ermittleGewinner.php');
+require_once('tabelleTipps.php');
 
 session_start();
 if(!isset($_SESSION["nickname"])){
@@ -17,7 +19,6 @@ if(!isset($_SESSION["nickname"])){
 }
 
 $benutzer = $_SESSION["benutzer"];
-require_once('ermittleGewinner.php');
 if($benutzer == "admin"){
   header("Location: admin_tippspiel.php");
 }
@@ -99,6 +100,8 @@ $anzahlSpiele = $stmt->rowCount();
               <p id="spiel<?php echo $i?>"></p>
 
               <?php
+              //ausgabe Tabelle
+              tabelle($db, $i);
               //Überprüfen ob Datum und Uhrzeit noch nicht überstiegen wurden
               if($aktuellesDatum <= $spielDatum){
                 if($aktuelleUhrzeit <= $spielUhrzeit || $aktuellesDatum < $spielDatum){
@@ -143,13 +146,23 @@ $anzahlSpiele = $stmt->rowCount();
                     $stmt = $db->prepare("UPDATE benutzer_tippt_fußballspiel SET punkteErhalten = true WHERE b_id = $benutzer_id and f_id = $i");
                     $stmt->execute();
                   }
-                  // else {
-                  //    ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
-                  //   "Du hast 30 punkte dafür bekommen" ; </script> </div> <?php
-                  // }
+                  else {
+                    $stmt = $db->prepare("SELECT * FROM fußballspiel WHERE f_id = $i");
+                    $stmt->execute();
+                    $ergebnis_array = $stmt->fetch();
+                    $ergebnisA = $ergebnis_array["ergebnis_a"];
+                    $ergebnisB = $ergebnis_array["ergebnis_b"];
+                     ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                    "Spiel ist beendet <?php echo $mA ?> hat <?php echo $ergebnisA ?> Tore geschossen und <?php echo $mB ?> hat <?php echo $ergebnisB ?> Tore geschossen. Deine Punkte wurden dir gut geschrieben"; </script> </div> <?php
+                  }
                   }else {
+                    $stmt = $db->prepare("SELECT * FROM fußballspiel WHERE f_id = $i");
+                    $stmt->execute();
+                    $ergebnis_array = $stmt->fetch();
+                    $ergebnisA = $ergebnis_array["ergebnis_a"];
+                    $ergebnisB = $ergebnis_array["ergebnis_b"];
                     ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
-                    "Du hast auf dieses Spiel nicht getippt" ; </script> </div> <?php
+                    "Spiel ist beendet <?php echo $mA ?> hat <?php echo $ergebnisA ?> Tore geschossen und <?php echo $mB ?> hat <?php echo $ergebnisB ?> Tore geschossen. Du hast auf dieses Spiel nicht getippt" ; </script> </div> <?php
                   }
                   ?> </div> <?php
               }
@@ -163,21 +176,27 @@ $anzahlSpiele = $stmt->rowCount();
                   $erhaltenArray = $stmt->fetch();
                   $erhalten = $erhaltenArray["punkteErhalten"];
                   if($erhalten == 0){
-                  $neuePunkte = $punktestand;
-                  echo $punktestand;
                   ausgabePunkte($i, $db, $benutzer_id, $punktestand);
-                  echo $punktestand;
-                  $neuePunkte = $punktestand - $neuePunkte;
                   $stmt = $db->prepare("UPDATE benutzer_tippt_fußballspiel SET punkteErhalten = true WHERE b_id = $benutzer_id and f_id = $i");
                   $stmt->execute();
                 }
-                // else {
-                //    ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
-                //    "Du hast 30 punkte dafür bekommen" ; </script> </div> <?php
-                // }
+                else {
+                  $stmt = $db->prepare("SELECT * FROM fußballspiel WHERE f_id = $i");
+                  $stmt->execute();
+                  $ergebnis_array = $stmt->fetch();
+                  $ergebnisA = $ergebnis_array["ergebnis_a"];
+                  $ergebnisB = $ergebnis_array["ergebnis_b"];
+                   ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
+                   "Spiel ist beendet <?php echo $mA ?> hat <?php echo $ergebnisA ?> Tore geschossen und <?php echo $mB ?> hat <?php echo $ergebnisB ?> Tore geschossen. Deine Punkte wurden dir gut geschrieben"; </script> </div> <?php
+                }
               }else {
+                $stmt = $db->prepare("SELECT * FROM fußballspiel WHERE f_id = $i");
+                $stmt->execute();
+                $ergebnis_array = $stmt->fetch();
+                $ergebnisA = $ergebnis_array["ergebnis_a"];
+                $ergebnisB = $ergebnis_array["ergebnis_b"];
                 ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
-                "Du hast auf dieses Spiel nicht getippt" ; </script> </div> <?php
+                "Spiel ist beendet <?php echo $mA ?> hat <?php echo $ergebnisA ?> Tore geschossen und <?php echo $mB ?> hat <?php echo $ergebnisB ?> Tore geschossen. Du hast auf dieses Spiel nicht getippt" ; </script> </div> <?php
               }
                 ?> </div> <?php
           }
