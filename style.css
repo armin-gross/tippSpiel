@@ -124,7 +124,6 @@ button:hover{
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 150px;
-  color: #ec0030;
   position: absolute;
   top: 380px;
   left: 50%;
@@ -139,7 +138,6 @@ button:hover{
  margin-top: 20px;
  margin-bottom: 20px;
  margin-left: 150px;
- color: #ec0030;
 }
 .benutzer{
    float: right;
@@ -258,6 +256,18 @@ button:hover{
   font-family: fantasy;
   margin-left: 250px;
 }
+#formularTore{
+  text-align: center;
+  font-size: 30px;
+  font-family: fantasy;
+  margin-left: 250px;
+}
+#datumUhrzeit{
+  text-align: center;
+  font-size: 30px;
+  font-family: fantasy;
+  margin-left: 250px;
+}
 #neuesTeamA{
   height: 30px;
   width: 250px;
@@ -268,6 +278,29 @@ button:hover{
 
 }
 #neuesTeamB{
+  height: 30px;
+  width: 250px;
+  text-align: center;
+  font-size: 30px;
+  font-family: fantasy;
+  text-decoration: none;
+
+}
+#toreTeamA{
+  height: 30px;
+  width: 250px;
+  text-align: center;
+  font-size: 30px;
+  font-family: fantasy;
+  text-decoration: none;
+
+
+}
+#toreTeamA::after{
+  content: \n;
+  white-space: pre;
+}
+#toreTeamB{
   height: 30px;
   width: 250px;
   text-align: center;
@@ -298,6 +331,56 @@ button:hover{
   font-family: fantasy;
 
 }
+#toreEintragen{
+  text-align: center;
+  font-size: 25px;
+  font-family: fantasy;
+  border: none;
+  color: white;
+  background-color: #ec0030;
+  height: 40px;
+  width: 200px;
+  margin: auto;
+  margin-top: 50px;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+#uhrzeit{
+  height: 30px;
+  width: 250px;
+  text-align: center;
+  font-size: 30px;
+  font-family: fantasy;
+  text-decoration: none;
+}
+#datum{
+  height: 30px;
+  width: 250px;
+  text-align: center;
+  font-size: 30px;
+  font-family: fantasy;
+  text-decoration: none;
+}
+#datumUhrzeitEintragen{
+  text-align: center;
+  font-size: 25px;
+  font-family: fantasy;
+  border: none;
+  color: white;
+  background-color: #ec0030;
+  height: 70px;
+  width: 280px;
+  margin: auto;
+  margin-top: 50px;
+  position: absolute;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+}
+
 table{
   border-color: red;
   text-align: center;

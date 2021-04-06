@@ -61,6 +61,7 @@ if($benutzer != "admin"){
           $_SESSION["teamA"] = $_POST["neuesTeamA"];
           $_SESSION["teamB"] = $_POST["neuesTeamB"];
           $teamA = $_SESSION["teamA"];
+          ?><br><?php
           $teamB = $_SESSION["teamB"];
 
           $stmt = $db->prepare("SELECT * FROM mannschaft WHERE mannschaft.nickname = '$teamA'"); //Überprüfen ob mannschaft bereits existiert
@@ -101,6 +102,7 @@ if($benutzer != "admin"){
         if(is_numeric($_POST["toreTeamA"]) && is_numeric($_POST["toreTeamB"])){
           if($_POST["toreTeamA"] <= 50 && $_POST["toreTeamB"] <= 50){
               $_SESSION["toreTeamA"] = $_POST["toreTeamA"];
+              ?><br><?php
               $_SESSION["toreTeamB"] = $_POST["toreTeamB"];
               ?> <script> datumUhrzeit() </script> <?php
             }else{
@@ -122,6 +124,7 @@ if($benutzer != "admin"){
         $teamA = $_SESSION["teamA"];
         $teamB = $_SESSION["teamB"];
         $toreTeamA = $_SESSION["toreTeamA"];
+        ?><br><?php
         $toreTeamB = $_SESSION["toreTeamB"];
         $datum = $_POST["datum"];
         $uhrzeit = $_POST["uhrzeit"];
