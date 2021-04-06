@@ -25,7 +25,7 @@ function tabelle($db, $welchesSpiel){
     echo "</tr>";
 
   for ($i=0; $i < $anzahlBenutzer ; $i++) {
-    //ausgabe Benutzer
+    //ausgabe Benutzer und tipps
     $benutzer_array = $stmtBenutzer->fetch();
     $benutzer = $benutzer_array["nickname"];
     $benutzer_id = $benutzer_array["b_id"];
