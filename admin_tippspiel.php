@@ -39,12 +39,20 @@ if($benutzer != "admin"){
         <a class="linkindex" href="kontoLoeschen.php">Konto Löschen</a>
       </div>
     </div>
+  </div>
 
+
+<div class="">
 
 
     <form method="post" id="form_spiel_erstellen">
-      <button type="button" name="spiel_erstellen_Felder_button" id="spiel_erstellen_Felder_button" onclick=neueManschaftenAdmin() style="margin-top: 100px;">Spiel erstellen</button>
+      <button class="button_admin" type="button" name="spiel_erstellen_Felder_button" id="spiel_erstellen_Felder_button" onclick=neueManschaftenAdmin() style="margin-top: 100px;">Spiel erstellen</button>
     </form>
+
+</div>
+
+<div class="fehlermedlung">
+
 
     <?php
 
@@ -130,6 +138,6 @@ if($benutzer != "admin"){
     }
 }
      ?>
-
+</div>
   </body>
 </html>

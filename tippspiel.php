@@ -113,7 +113,6 @@ $anzahlSpiele = $stmt->rowCount();
                   if($fußballspielBenutzer == 0){
                     ?>
                     <form method="post">
-                      <input class="nummerbox" name="welchesSpiel" value="<?php echo $i?>" readonly size="1px"><!-- input um zu wissen, wessen spiels button geklickt wurde -->
                       <button class="button_2" type="button" id="spiel<?php echo $i?>_bt" name="spiel_bt"
                         onclick=neuesFeld(<?php echo $i?>,"<?php echo $mA; ?>","<?php echo $mB; ?>",<?php echo $anzahlSpiele; ?>)
                         >Wette auf diesem Spiel platzieren</button><!-- button der onclick i, mannschaftA, mannschaftB und anzahlSpiele übergibt -->
@@ -198,7 +197,8 @@ $anzahlSpiele = $stmt->rowCount();
                 ?> <script> document.getElementById("spiel<?php echo $i ?>").innerHTML =
                 "Spiel ist beendet <?php echo $mA ?> hat <?php echo $ergebnisA ?> Tore geschossen und <?php echo $mB ?> hat <?php echo $ergebnisB ?> Tore geschossen. Du hast auf dieses Spiel nicht getippt" ; </script> </div> <?php
               }
-                ?> </div> <?php
+                ?> </div>
+      <?php
           }
             }
           }
@@ -220,13 +220,12 @@ $anzahlSpiele = $stmt->rowCount();
         $stmt->execute();
       }
       }else {
-      echo "<text class='fehlermedlung'>Deine Tipps dürfen nicht höher als 50 sein</text>";
+      echo "<text class='fehlermedlung_tipp'>Deine Tipps dürfen nicht höher als 50 sein</text>";
       }
       }else {
-        echo "<text class='fehlermedlung'>Deine Tipps müssen schon Zahlen sein</text>";
+        echo "<text class='fehlermedlung_tipp'>Deine Tipps müssen schon Zahlen sein</text>";
       }
     }
     ?>
-
   </body>
 </html>

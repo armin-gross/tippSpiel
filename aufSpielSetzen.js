@@ -1,3 +1,4 @@
+
 let ueberpruefung = 0;
 
 function neuesFeld(i, mannschaftA, mannschaftB, anzahlSpiele) {
