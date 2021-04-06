@@ -159,7 +159,7 @@ function neuesErgebnisAdmin(teamA, teamB) {
   f.appendChild(absatz1);
   f.appendChild(teamBschiesst);
   f.appendChild(toreTeamB);
-  f.appendChild(absatz1);
+  f.appendChild(absatz2);
   f.appendChild(toreEintragen);
 
   //formular zu body hinzufügen
