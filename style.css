@@ -185,7 +185,7 @@ button:hover{
   background-color: #ec0030;
   height: 40px;
   width: 180px;
-  margin-top: 120px;
+  margin-top: 60px;
 
 }
 .nummerbox{
@@ -318,7 +318,7 @@ button:hover{
   background-color: #ec0030;
   height: 40px;
   width: 180px;
-  margin-top: 100px;
+  margin-top: 60px;
 }
 #tippen_bt:hover{
   background: white;
@@ -379,16 +379,15 @@ button:hover{
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-}
 
 table{
   border-color: red;
   text-align: center;
   margin: auto;
   position: absolute;
-  margin-top: 70px;
-  left: 50%;
-  margin-bottom: 20px;
+  font-size: 15px;
+  height: 10px;
+  left: 75%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 
